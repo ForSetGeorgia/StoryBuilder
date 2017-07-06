@@ -145,7 +145,7 @@ class StoryTranslation < ActiveRecord::Base
   def generate_shortened_url
     require 'open-uri'
     require 'uri'
-    token = Rails.env.production? ? ENV['STORY_BUILDER_BITLY_TOKEN'] : ENV['STORY_BUILDER_BITLY_TOKEN_DEV']
+    token = Rails.env.production? ? ENV['BITLY_TOKEN'] : ENV['BITLY_TOKEN_DEV']
     # only continue if the token is in the environment variables
     if token.present?
       # if the story locale is not one of the app locales, use the default locale

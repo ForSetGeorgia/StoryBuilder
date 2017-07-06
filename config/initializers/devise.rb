@@ -11,7 +11,7 @@ Devise.setup do |config|
 
   # Automatically apply schema changes in tableless databases
   config.apply_schema = false
- 
+
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
@@ -221,13 +221,13 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
   require "omniauth-facebook"
-  
+
 
   if Rails.env.production?
-    config.omniauth :facebook, ENV['STORY_BUILDER_FACEBOOK_APP_ID'], ENV['STORY_BUILDER_FACEBOOK_APP_SECRET']
+    config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
   else
-    config.omniauth :facebook, ENV['DEV_FACEBOOK_APP_ID'], ENV['DEV_FACEBOOK_APP_SECRET'] 
-  end  
+    config.omniauth :facebook, ENV['FACEBOOK_APP_ID_DEV'], ENV['FACEBOOK_APP_SECRET_DEV']
+  end
 
   I18n.enforce_available_locales = false
 

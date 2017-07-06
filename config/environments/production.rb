@@ -47,7 +47,7 @@ BootstrapStarter::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = false
-	config.action_mailer.default_url_options = { :host => 'chai-khana.org', :protocol => 'https' }
+	config.action_mailer.default_url_options = { :host => 'storybuilder.forset.ge', :protocol => 'https' }
 	config.action_mailer.delivery_method = :smtp
 
   # Enable threaded mode
@@ -62,7 +62,7 @@ BootstrapStarter::Application.configure do
 
 	# options for exception notification gem
 	config.middleware.use ExceptionNotifier,
-		:email_prefix => "[Chai Khana App Error (#{Rails.env})] ",
-		:sender_address => ENV['STORY_BUILDER_FROM_EMAIL'],
-		:exception_recipients => [ENV['STORY_BUILDER_ERROR_TO_EMAIL']]
+		:email_prefix => "[Forset Storybuilder App Error (#{Rails.env})] ",
+    :sender_address => ENV['ERROR_EMAIL_FROM'],
+    :exception_recipients => [ENV['ERROR_EMAIL_TO']]
 end

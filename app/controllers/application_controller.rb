@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
     @languages_published = @languages.select{|x| x.has_published_stories == true}
 		# @categories = Category.sorted
   #   @categories_published = @categories.select{|x| x.has_published_stories == true}
-    @face_id = Rails.env.production? ? ENV['STORY_BUILDER_FACEBOOK_APP_ID'] : ENV['DEV_FACEBOOK_APP_ID']
+    @face_id = Rails.env.production? ? ENV['FACEBOOK_APP_ID'] : ENV['FACEBOOK_APP_ID_DEV']
     # for loading extra css/js files
 		@css = []
 		@js = []
@@ -113,7 +113,7 @@ class ApplicationController < ActionController::Base
     #gon.msgs_one_section_slideshow = I18n.t('app.msgs.one_section.slideshow')
     #gon.msgs_one_section_embed_media = I18n.t('app.msgs.one_section.embed_media')
     #gon.msgs_one_section_youtube = I18n.t('app.msgs.one_section.youtube')
-    gon.youtube_api_key = ENV['STORY_BUILDER_YOUTUBE_API_KEY']
+    gon.youtube_api_key = ENV['YOUTUBE_API_KEY']
 
 		if I18n.locale == :ka
 		  gon.datatable_i18n_url = "/datatable_ka.txt"

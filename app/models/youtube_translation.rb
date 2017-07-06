@@ -7,7 +7,7 @@ class YoutubeTranslation < ActiveRecord::Base
 
   #################################
   ## Validations
-  validates :title, :presence => true, length: { maximum: 255}  
+  validates :title, :presence => true, length: { maximum: 255}
   validates :url, :presence => true
   validates :url, :format => {:with => URI::regexp(['http','https']), :message => I18n.t('errors.messages.invalid_format_url') }, :if => "!url.blank?"
   validate :generate_iframe
@@ -24,8 +24,8 @@ class YoutubeTranslation < ActiveRecord::Base
 #  before_validation :generate_iframe
   def generate_iframe
     id = ''
-    u = self.url 
-    api_key = ENV['STORY_BUILDER_YOUTUBE_API_KEY']
+    u = self.url
+    api_key = ENV['YOUTUBE_API_KEY']
     if api_key.nil?
      errors.add(:code, I18n.t('stories.youtube.generate_iframe.missing_api_key'))
      return false
@@ -40,7 +40,7 @@ class YoutubeTranslation < ActiveRecord::Base
           id = uri[1]
         end
       end
-      if id.length == 11    
+      if id.length == 11
         source = "https://www.googleapis.com/youtube/v3/videos?key=#{api_key}&part=id&id=#{id}"
         result = JSON.parse(Net::HTTP.get_response(URI.parse(source)).body)
 
@@ -49,9 +49,9 @@ class YoutubeTranslation < ActiveRecord::Base
            return true
         end
       end
-    end   
+    end
 
-     self.errors.add(:code, I18n.t('stories.youtube.generate_iframe.error'))       
+     self.errors.add(:code, I18n.t('stories.youtube.generate_iframe.error'))
      return false
   end
 

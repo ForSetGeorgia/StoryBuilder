@@ -9,7 +9,7 @@ The idea for this application came after viewing mixed-media stories like this [
 ## How It Works
 StoryBuilder is similar to a blog editor like wordpress or tumblr, but at this point is still a little rustic.  In essence, StoryBuilder allows you to add content, images, and/or videos into sections in a story that can be ordered however you want.
 
-Right now there are four types of sections that can be created: 
+Right now there are four types of sections that can be created:
 * Text: Simple text with a rich-text editor like Word or Google Docs.
 * Embed Online Media: Add online video and audio from sites like youtube, vimeo and soundcloud.
 * Full-Screen Media: This can be a combination of images and/or videos that will appear on the screen in a vertical slider format, one after the other.  The media is stretched to fill the users entire window and a small caption text can appear ontop of the media.
@@ -32,17 +32,21 @@ You will need to install the following programs:
 * cron jobs - to send notifications and to process videos
 
 You will need the following [Environment Variables](https://help.ubuntu.com/community/EnvironmentVariables) set:
-* STORY_BUILDER_FROM_EMAIL - email address to send all emails from
-* STORY_BUILDER_FROM_PWD - password of above email address
-* STORY_BUILDER_TO_EMAIL - email address to send feedback form messages to
-* STORY_BUILDER_ERROR_TO_EMAIL - email address to send application errors to
-* STORY_BUILDER_FACEBOOK_APP_ID - Facebook is one of the options for logging in to the system and you must have an app account created under facebook developers. This key stores the application id.
-* STORY_BUILDER_FACEBOOK_APP_SECRET - This key stores the facebook application secret.
-* STORY_BUILDER_DISQUS - Disqus is used for the commenting system and your unique website key is stored here
-* STORY_BUILDER_BITLY_TOKEN - bit.ly generic access token ([get from here](https://bitly.com/a/oauth_apps)) used to shorten URLs to published stories
-* STORY_BUILDER_BITLY_TOKEN_DEV - same as above, but for use in testing environments
-* STORY_BUILDER_ADDTHIS_PROFILEID - addthis.com profile ID ([get from here](https://www.addthis.com/settings/publisher)) to use the addthis share tools
-* STORY_BUILDER_ADDTHIS_PROFILEID_DEV - same as above, but for use in testing environments
-* STORY_BUILDER_YOUTUBE_API_KEY - YouTube API key ([get from here](https://console.developers.google.com/project)) is used to verify that the YouTube urls exist.
+* EMAIL_FROM - email address to send all emails from
+* EMAIL_FROM_PWD - password of above email address
+* EMAIL_FROM_SMTP - smtp address of above email address
+* EMAIL_TO - email address to send feedback form messages to
+* ERROR_EMAIL_FROM - email address to send application errors from
+* ERROR_EMAIL_TO - email address to send application errors to
+* FACEBOOK_APP_ID - Facebook is one of the options for logging in to the system and you must have an app account created under facebook developers. This key stores the application id.
+* FACEBOOK_APP_ID_DEV - same as above, but for use in testing environments
+* FACEBOOK_APP_SECRET - This key stores the facebook application secret.
+* FACEBOOK_APP_SECRET_DEV - same as above, but for use in testing environments
+* YOUTUBE_API_KEY - YouTube API key ([get from here](https://console.developers.google.com/project)) is used to verify that the YouTube urls exist.
+* BITLY_TOKEN - bit.ly generic access token ([get from here](https://bitly.com/a/oauth_apps)) used to shorten URLs to published stories
+* BITLY_TOKEN_DEV - same as above, but for use in testing environments
+* DISQUS - Disqus is used for the commenting system and your unique website key is stored here
+* DISQUS_DEV - same as above, but for use in testing environments
+* ADDTHIS_PROFILEID - addthis.com profile ID ([get from here](https://www.addthis.com/settings/publisher)) to use the addthis share tools
+* ADDTHIS_PROFILEID_DEV - same as above, but for use in testing environments
 * DETECT_LANGUAGE_API_KEY - [Language Detection API](http://detectlanguage.com/) key for determining the language a story is written in
-

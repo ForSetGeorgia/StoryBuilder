@@ -289,7 +289,7 @@
         <% end %>
 
         <%
-          addthis_id = Rails.env.production? ? ENV['STORY_BUILDER_ADDTHIS_PROFILEID'] : 'ra-51d1537d4a09d85f'
+          addthis_id = Rails.env.production? ? ENV['ADDTHIS_PROFILEID'] : ENV['ADDTHIS_PROFILEID_DEV']
           if addthis_id.present?
         %>
           var addthis_share = { url: '<%= @short_url %>' }

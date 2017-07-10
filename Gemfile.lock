@@ -17,6 +17,15 @@ GIT
       railties (>= 3.0)
 
 GIT
+  remote: https://github.com/PerfectlyNormal/tinymce-rails-imageupload.git
+  revision: 4f272859cff1eb211701e4aa2e8021dd826e0272
+  branch: tinymce3
+  specs:
+    tinymce-rails-imageupload (3.5.8.6)
+      railties (>= 3.1)
+      tinymce-rails (~> 3.5, < 4)
+
+GIT
   remote: https://github.com/jilion/useragent.git
   revision: 742f29d8643f378773a933b3c0a37ce1bc52a7aa
   specs:
@@ -29,6 +38,14 @@ GIT
   specs:
     formtastic-bootstrap (3.0.0.rc.1)
       formtastic (>= 2.2)
+
+GIT
+  remote: https://github.com/spohlenz/tinymce-rails.git
+  revision: 689cd5da832eb3f605f1c7b153ec8f264ea134e5
+  branch: tinymce-3
+  specs:
+    tinymce-rails (3.5.11.1)
+      railties (>= 3.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -101,6 +118,10 @@ GEM
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
       warden (~> 1.1.1)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     dynamic_form (1.1.4)
     erubis (2.7.0)
     exception_notification (2.5.2)
@@ -248,11 +269,6 @@ GEM
       ref
     thor (0.19.1)
     tilt (1.4.1)
-    tinymce-rails (3.5.8.3)
-      railties (>= 3.1.1)
-    tinymce-rails-imageupload (3.5.8.6)
-      railties (>= 3.1)
-      tinymce-rails (~> 3.5.8.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -284,6 +300,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.2)
   detect_language (~> 1.0.7)
   devise (~> 2.0.4)
+  dotenv-rails (~> 2.2, >= 2.2.1)
   dynamic_form (~> 1.1.4)
   exception_notification (~> 2.5.2)
   formtastic (~> 2.2.1)
@@ -316,8 +333,8 @@ DEPENDENCIES
   subexec (~> 0.2.3)
   test-unit (~> 3.0)
   therubyracer
-  tinymce-rails (~> 3.5.8.3)
-  tinymce-rails-imageupload (= 3.5.8.6)
+  tinymce-rails!
+  tinymce-rails-imageupload!
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
   unicorn (~> 5.2.0)
@@ -330,4 +347,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.6
+   1.15.1

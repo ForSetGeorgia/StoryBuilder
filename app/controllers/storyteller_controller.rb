@@ -14,7 +14,7 @@ class StorytellerController < ApplicationController
       redirect_to storyteller_show_path(params.merge({ locale: sl})), :notice => t('app.msgs.redirected_with_app_locale')
     else
 
-      @story = Story.with_translations(I18n.locale).is_published.find_by_permalink(params[:id])
+      @story = Story.with_translations(I18n.locale).is_not_deleted.is_published.find_by_permalink(params[:id])
 
       if @story.present?
         @story.set_to_app_locale
@@ -57,7 +57,7 @@ class StorytellerController < ApplicationController
 
 
   def staff_pick
-  	story = Story.is_published.find_by_permalink(params[:id])
+  	story = Story.is_not_deleted.is_published.find_by_permalink(params[:id])
   	if story.present? && !story.staff_pick
   	  story.staff_pick = true
   	  story.save(:validate => false)
@@ -69,7 +69,7 @@ class StorytellerController < ApplicationController
   end
 
   def staff_unpick
-  	story = Story.is_published.find_by_permalink(params[:id])
+  	story = Story.is_not_deleted.is_published.find_by_permalink(params[:id])
   	if story.present? && story.staff_pick
   	  story.staff_pick = false
   	  story.save(:validate => false)
@@ -82,7 +82,7 @@ class StorytellerController < ApplicationController
 
 
   def like
-    story = Story.is_published.find_by_permalink(params[:id])
+    story = Story.is_not_deleted.is_published.find_by_permalink(params[:id])
     story.liked_by current_user if story.present?
 
     respond_to do |format|
@@ -93,7 +93,7 @@ class StorytellerController < ApplicationController
 
 
   def unlike
-    story = Story.is_published.find_by_permalink(params[:id])
+    story = Story.is_not_deleted.is_published.find_by_permalink(params[:id])
     story.unliked_by current_user if story.present?
 
     respond_to do |format|
@@ -102,7 +102,7 @@ class StorytellerController < ApplicationController
   end
 
   def record_comment
-    story = Story.is_published.find_by_permalink(params[:id])
+    story = Story.is_not_deleted.is_published.find_by_permalink(params[:id])
     story.increment_comment_count if story.present?
 
     respond_to do |format|

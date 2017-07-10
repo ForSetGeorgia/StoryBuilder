@@ -21,7 +21,7 @@ class StoriesController < ApplicationController
   def index
     @css.push("navbar.css", "filter.css", "grid.css","author.css")
     @js.push("filter.js","stories.js")
-    @stories =  process_filter_querystring(Story.editable_stories(current_user.id).paginate(:page => params[:page], :per_page => per_page))
+    @stories =  process_filter_querystring(Story.is_not_deleted.editable_stories(current_user.id).paginate(:page => params[:page], :per_page => per_page))
     @editable = (user_signed_in?)
     respond_to do |format|
       format.html  #index.html.erb
@@ -55,7 +55,7 @@ class StoriesController < ApplicationController
 
   # GET /stories/1/edit
   def edit
-    @item = Story.find(params[:id])
+    @item = Story.is_not_deleted.find(params[:id])
     # if !@item.asset_exists?
     #   @item.build_asset(:asset_type => Asset::TYPE[:story_thumbnail])
     # end
@@ -100,7 +100,7 @@ class StoriesController < ApplicationController
   # PUT /stories/1
   # PUT /stories/1.json
   def update
-    @item = Story.find(params[:id])
+    @item = Story.is_not_deleted.find(params[:id])
 
     respond_to do |format|
       if !@item.published && params[:story][:published]=="1"
@@ -145,8 +145,10 @@ class StoriesController < ApplicationController
   def destroy
     @story = Story.find(params[:id])
 
-     @story.destroy
-     if @story.destroyed?
+     # @story.destroy
+    @story.deleted = true
+    @story.deleted_at = Time.now
+     if @story.save
           flash[:success] = I18n.t('app.msgs.destroy_story.success')
       else
           flash[:error] = I18n.t('app.msgs.destroy_story.error', :err => @story.errors.full_messages.to_sentence)
@@ -162,7 +164,7 @@ class StoriesController < ApplicationController
     @css.push("navbar.css", "navbar2.css", "storyteller.css", "modalos.css")
     @js.push("storyteller.js","modalos.js")
 
-    @story = Story.find_by_reviewer_key(params[:id])
+    @story = Story.is_not_deleted.find_by_reviewer_key(params[:id])
     if @story.present?
       if @story.published
         Rails.logger.debug("--------------------------------------------------- storyteller_show_path")
@@ -186,7 +188,7 @@ class StoriesController < ApplicationController
       @no_nav = true
     end
 
-  	@story = Story.fullsection(params[:id])
+  	@story = Story.is_not_deleted.fullsection(params[:id])
     @story.set_prime_locale(params[:sl]) if @story.present?
 
     respond_to do |format|
@@ -216,7 +218,7 @@ class StoriesController < ApplicationController
     @trans = false
     @from = I18n.locale
     @to = nil
-    @story = Story.find_by_id(id)
+    @story = Story.is_not_deleted.find_by_id(id)
 
     if @story.present?     # if story exists, set some params
       @from = @story.story_locale # set default locale to story locale
@@ -552,7 +554,7 @@ logger.debug "@@@@@@@@@@@@@ d height = #{params[:infographic][:dynamic_height]};
 
   def sections
     #Rails.logger.debug("---------------------------------------------#{params.inspect}")
-    @story = Story.fullsection(params[:id])
+    @story = Story.is_not_deleted.fullsection(params[:id])
     @tr = params.has_key?(:tr) ? params[:tr].to_bool : false
     @from  = @story.story_locale
     if @tr
@@ -582,7 +584,7 @@ logger.debug "@@@@@@@@@@@@@ d height = #{params[:infographic][:dynamic_height]};
 
   def publish
 
-    @item = Story.find_by_id(params[:id])
+    @item = Story.is_not_deleted.find_by_id(params[:id])
     @item.current_locale = params[:sl].present? ? params[:sl].strip : @item.story_locale
     publishing = !@item.published
     pub_title = ''
@@ -646,7 +648,7 @@ end
     begin
       @css.clear()
       @js.clear()
-      @story = Story.fullsection(params[:id])
+      @story = Story.is_not_deleted.fullsection(params[:id])
       rootPath = "#{Rails.root}/tmp/stories";
       filename = StoriesHelper.transliterate(@story.title.downcase);
       filename_ext = SecureRandom.hex(3)
@@ -719,7 +721,7 @@ end
     exception = nil
     begin
       Story.transaction do
-        @item = Story.find(params[:id])
+        @item = Story.is_not_deleted.find(params[:id])
         dup = @item.clone_story
 
         if dup.valid?
@@ -792,7 +794,7 @@ end
 
   # search for existing tags
   def tag_search
-    tags = Story.all_tag_counts.by_tag_name(params[:q]).token_input_tags
+    tags = Story.is_not_deleted.all_tag_counts.by_tag_name(params[:q]).token_input_tags
 
     respond_to do |format|
       format.json { render json: tags }
@@ -800,7 +802,7 @@ end
   end
 
   def collaborators
-    @story = Story.find_by_id(params[:id])
+    @story = Story.is_not_deleted.find_by_id(params[:id])
 
     if @story.present?
       sending_invitations = false
@@ -868,7 +870,7 @@ end
 
   def collaborator_search
     output = nil
-    story = Story.find_by_id(params[:id])
+    story = Story.is_not_deleted.find_by_id(params[:id])
     if story.present?
       users = story.user_collaboration_search(params[:q])
       # format for token input js library [{id,name}, ...]
@@ -882,7 +884,7 @@ end
 
   # remove a collaborator from a story
   def remove_collaborator
-    story = Story.find_by_id(params[:id])
+    story = Story.is_not_deleted.find_by_id(params[:id])
 		msg = ''
 		has_errors = false
 
@@ -903,7 +905,7 @@ end
   # remove an invitation from a story
   # - must be story owner to remove
   def remove_invitation
-    story = Story.find_by_id(params[:id])
+    story = Story.is_not_deleted.find_by_id(params[:id])
 		msg = ''
 		has_errors = false
 
@@ -925,7 +927,7 @@ end
   def translation_progress
     id = params[:id]
     locale = params[:sl].strip
-    @story = Story.find_by_id(id)
+    @story = Story.is_not_deleted.find_by_id(id)
 
     respond_to do |format|
       if @story.present?

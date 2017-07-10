@@ -74,6 +74,7 @@ class Story < ActiveRecord::Base
   after_create :add_coordinators
   before_destroy :trigger_translation_observer, prepend: true
 
+  scope :is_not_deleted, where(:deleted => false)
 
   # if the reviewer key does not exist, create it
   def generate_reviewer_key
@@ -367,7 +368,7 @@ class Story < ActiveRecord::Base
         end
       end
     end
-    
+
     next_ordered
   end
 

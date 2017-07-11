@@ -1,7 +1,7 @@
-# JumpStart Georgia's StoryBuilder used for [Chai Khana's site](http://chai-khana.org).
+# ForSet StoryBuilder used for [Chai Khana's site](http://chai-khana.org).
 
 ## Summary
-StoryBuilder is a web application that allows users to build mixed-media stories that can then be shared with the world. You can try StoryBuilder out for yourself [here](http://storybuilder.jumpstart.ge/en).
+StoryBuilder is a web application that allows users to build mixed-media stories that can then be shared with the world. You can try StoryBuilder out for yourself [here](http://storybuilder.forset.ge/en).
 
 The idea for this application came after viewing mixed-media stories like this [New York Times story](http://www.nytimes.com/newsgraphics/2013/10/27/south-china-sea/). We wanted to be able to create stories like this without having to start from scratch for every story.  We wanted to be able to quickly put interactive, mixed-media stories together without having to require a lot of designer or developer time.  That is the goal of this application.
 

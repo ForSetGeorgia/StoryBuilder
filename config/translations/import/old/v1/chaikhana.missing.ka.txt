@@ -1,3 +1,0 @@
-Untranslated String ID
-======================
-ka.storyteller.by

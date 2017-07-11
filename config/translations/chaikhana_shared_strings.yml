@@ -265,10 +265,10 @@
   - en.app.common.app_intro_meta
 - - en.app.common.admin
   - en.layouts.unsupported_browser.admin
-- - en.app.common.js_link_title
-  - en.layouts.unsupported_browser.js_link_title
-- - en.app.common.js_link_text
-  - en.layouts.unsupported_browser.js_link_text
+- - en.app.common.fs_link_title
+  - en.layouts.unsupported_browser.fs_link_title
+- - en.app.common.fs_link_text
+  - en.layouts.unsupported_browser.fs_link_text
 - - en.app.common.following
   - en.filters.following
 - - en.app.common.views

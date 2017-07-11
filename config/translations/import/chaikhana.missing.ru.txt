@@ -1,4 +1,0 @@
-Untranslated String ID
-======================
-ru.activerecord.attributes.infographic_translations
-ru.app.common.powered_by_end

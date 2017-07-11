@@ -128,10 +128,12 @@ app_langs = []
 I18n.available_locales.each do |locale|
   app_langs << langs.select{|x| x[0] == locale.to_s}.first
 end
-
-sql = "insert into languages (locale, name) values "
-sql << app_langs.map{|x| "(\"#{x[0]}\", \"#{x[1]}\")"}.join(', ')
-ActiveRecord::Base.connection.execute(sql)
+app_langs.each{|lang|
+  Language.create(locale: lang[0], name: lang[1])
+}
+# sql = "insert into languages (locale, name) values "
+# sql << app_langs.map{|x| "(\"#{x[0]}\", \"#{x[1]}\")"}.join(', ')
+# ActiveRecord::Base.connection.execute(sql)
 
 if !Rails.env.production?
 
@@ -163,13 +165,13 @@ if !Rails.env.production?
   t = Theme.create(:id => 2, :published_at => '2014-12-15')
   t.theme_translations.create(:locale => 'en', :name => '2nd test theme', edition: 'December 2014')
   t.theme_translations.create(:locale => 'ka', :name => '2nd test theme', edition: 'December 2014')
-  published[8..10].each_with_index do |story, i|
-    story.themes << t
-    if i % 2 == 0
-      story.in_theme_slider = true
-    end
-    story.save
-  end
+  # published[8..10].each_with_index do |story, i|
+  #   story.themes << t
+  #   if i % 2 == 0
+  #     story.in_theme_slider = true
+  #   end
+  #   story.save
+  # end
   t.is_published = true
   t.save
 
@@ -177,21 +179,21 @@ if !Rails.env.production?
   t = Theme.create(:id => 3, :published_at => '2014-11-15')
   t.theme_translations.create(:locale => 'en', :name => '3rd test theme', edition: 'November 2015')
   t.theme_translations.create(:locale => 'ka', :name => '3rd test theme', edition: 'November 2015')
-  published[10..20].each_with_index do |story, i|
-    story.themes << t
-    if [1, 5, 9].include?(i)
-      story.in_theme_slider = true
-    end
-    story.save
-  end
+  # published[10..20].each_with_index do |story, i|
+  #   story.themes << t
+  #   if [1, 5, 9].include?(i)
+  #     story.in_theme_slider = true
+  #   end
+  #   story.save
+  # end
   t.is_published = true
   t.save
 
 
   # add story type to remaining stories
-  published[21..published.length-1].each do |story|
-    story.save
-  end
+  # published[21..published.length-1].each do |story|
+  #   story.save
+  # end
 
   # clear out all existing story user roles if a person is a coordinator
   coords = User.where(:role => User::ROLES[:coordinator]).pluck(:id)

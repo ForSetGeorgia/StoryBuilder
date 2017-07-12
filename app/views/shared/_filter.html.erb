@@ -19,7 +19,7 @@
     </li>
     <li class="dropdown dropdown-hover afilter">
       <a href="#" class="dropdown-toggle<%= @story_filter_type_all ? '' : ' selected' %>"
-        data-toggle="dropdown" tabindex="18"  title="<%= t('filters.sort_title') %>"
+        data-toggle="dropdown" tabindex="18"  title="<%= t('filters.type_title') %>"
         data-filtered-by="<%= @story_filter_type_permalink %>" data-filter-type="type"
         data-filter-default="all"><%= t('helpers.links.story_types') %><i class="caret"></i></a>
         <ul class="dropdown-menu afilter-list">
@@ -35,7 +35,7 @@
     </li>
     <li class="dropdown dropdown-hover afilter">
       <a href="#" class="dropdown-toggle<%= @story_filter_country_all ? '' : ' selected' %>"
-        data-toggle="dropdown" tabindex="18"  title="<%= t('filters.sort_title') %>"
+        data-toggle="dropdown" tabindex="18"  title="<%= t('filters.country_title') %>"
         data-filtered-by="<%= @story_filter_country_permalink %>" data-filter-type="country"
         data-filter-default="all"><%= t('helpers.links.countries') %><i class="caret"></i></a>
         <ul class="dropdown-menu afilter-list">

@@ -300,6 +300,7 @@ ka:
       themes: "თემა"
       story_types: "ტიპი"
       languages: "ენები"
+      countries: Countries
       logos: Logos
       follow: "გამოწერა"
       facebook: Facebook
@@ -565,6 +566,8 @@ ka:
     staff_pick_title_active: "რჩეულის ფილტრის გაუქმება"
     sort_header: "დალაგება:"
     sort_title: "როგორ გსურთ ამბების დალაგება?"
+    type_title: Indicate story type
+    country_title: Indicate story country
     filters: "ფილტრი"
     all_stories: "ყველა ამბავი"
     sort:

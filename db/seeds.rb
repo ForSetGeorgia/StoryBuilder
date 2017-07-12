@@ -138,6 +138,7 @@ puts 'loading languages'
 
 puts 'loading countries'
   Country.delete_all
+  CountryTranslation.delete_all
   countries = [
     { en: "Afghanistan", ka: "ავღანეთი" },
     { en: "Aland Islands", ka: "ალანდის კუნძულები" },
@@ -393,18 +394,9 @@ puts 'loading countries'
   countries.each{ |country|
     c = Country.create()
     [:en, :ka].each {|locale|
-
-      Globalize.with_locale(locale) do
-        c.update_attributes(name: country[locale])
-      end
+      c.country_translations.create(:locale => locale, :name => country[locale])
     }
   }
-
-
-
-
-
-
 
 
 if !Rails.env.production?

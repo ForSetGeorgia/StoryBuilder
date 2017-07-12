@@ -140,6 +140,7 @@ class ApplicationController < ActionController::Base
     gon.page_filtered = params[:sort].present? ||
                         params[:theme].present? ||
                         params[:language].present? ||
+                        params[:country].present? ||
                         params[:q].present? ||
                         params[:following].present?
 
@@ -213,13 +214,12 @@ class ApplicationController < ActionController::Base
       @story_filter_theme = I18n.t("filters.all")
     end
 
-
     # country
     @story_filter_country_all = true
     @story_filter_country_permalink =  ""
-    index = params[:country].present? ? @countries_published.index{|x| x.permalink.downcase == params[:category].downcase} : nil
+    index = params[:country].present? ? @countries_published.index{|x| x.permalink.downcase == params[:country].downcase} : nil
     if index.present?
-      countries = story_objects.by_country(@countries_published[index].id)
+      story_objects = story_objects.by_country(@countries_published[index].id)
       @story_filter_country = @countries_published[index].name
       @story_filter_country_permalink =  @countries_published[index].permalink
       @story_filter_country_all = false
@@ -290,7 +290,7 @@ class ApplicationController < ActionController::Base
      # logger.debug "/////////////////// @story_filter_following = #{@story_filter_following}"
 
 
-    gon.params = params.select { |k, v| [:sort, :type, :theme, :following, :not_published].include?(k.to_sym) }
+    gon.params = params.select { |k, v| [:sort, :type, :theme, :following, :not_published, :country].include?(k.to_sym) }
     return story_objects
   end
 

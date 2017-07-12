@@ -300,6 +300,7 @@ en:
       themes: Themes
       story_types: Types
       languages: Languages
+      countries: Countries
       logos: Logos
       follow: Follow
       facebook: Facebook
@@ -565,6 +566,8 @@ en:
     staff_pick_title_active: Remove Staff Pick filter
     sort_header: "Sorted By:"
     sort_title: Indicate how the stories should be sorted
+    type_title: Indicate story type
+    country_title: Indicate story country
     filters: Filters
     all_stories: All Stories
     sort:

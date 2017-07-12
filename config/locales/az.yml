@@ -20,6 +20,7 @@ az:
       asset: fayl
       logo: logo
       highlight: Highlight
+      country: Country
     attributes:
       asset: &asset
         asset_file_name: fayl
@@ -71,6 +72,7 @@ az:
         story_type: Növ
         in_theme_slider: Hekayəni Mövzu Slaydlarında Göstər
         has_disclaimer: "Include Story Disclaimer?"
+        countries: "Countries"
       story_translation: &story_translation
         title: Hekayənin Sərlövhəsi
         author: Müəllif(lər)
@@ -175,6 +177,9 @@ az:
       category_translation: &category_translation
         name: Ad
       category_translations: *category_translation
+      country_translation: &country_translation
+        name: Name
+      country_translation: *country_translation
       page:
         name: Məzmunun Xüsusi adı (bunu dəyişmə!)
       page_translation: &page_translation
@@ -568,6 +573,8 @@ az:
       likes: Bəyənənlər
     category_header: Kateqoriyalar
     category_title: Kateqoriyaya aid olan hekayələrə bax
+    country_header: Country
+    country_title: View stories that belong to a country
     theme_header: Mövzu
     theme_title: Mövuya aid olan hekayələrə bax
     language_header: Dil
@@ -681,6 +688,7 @@ az:
         theme: Hekayənizə aid olan mövzuları seçin.
         in_theme_slider: Seçilibsə, bu hekayə mövzu səhifəsinin yuxarı panelində göstəriləcək.
         has_disclaimer: "Bu sahəni seçərkən hekayənin qeydi hekayənin üstündə ya da altında görünəcək."
+        country: Select the country(s) your story belongs to.  Allows users to filter stories by a country.
     collaborators:
       title: "%{title}' Əməkdaşları"
       owner_header: Hekayə müəllifi

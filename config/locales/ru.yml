@@ -20,6 +20,7 @@ ru:
       asset: "Файл"
       logo: Лого
       highlight: Highlight
+      country: Country
     attributes:
       asset: &asset
         asset_file_name: "Файл"
@@ -71,6 +72,7 @@ ru:
         story_type: "Тип"
         in_theme_slider: "Показать историю в тематическом слайдере"
         has_disclaimer: "Include Story Disclaimer?"
+        countries: "Countries"
       story_translation: &story_translation
         title: "Название истории"
         author: "Автор(ы)"
@@ -175,6 +177,9 @@ ru:
       category_translation: &category_translation
         name: "Имя"
       category_translations: *category_translation
+      country_translation: &country_translation
+        name: Name
+      country_translation: *country_translation
       page:
         name: "Уникальное название для контента (не изменять!)"
       page_translation: &page_translation
@@ -568,6 +573,8 @@ ru:
       likes: "количеству лайков"
     category_header: "Категория"
     category_title: "Прoсмотривать истории которые относятся к категории"
+    country_header: Country
+    country_title: View stories that belong to a country
     theme_header: "Тема"
     theme_title: "Просмотривать истории по теме"
     language_header: "Язык"
@@ -681,6 +688,7 @@ ru:
         theme: "Выберите тему(ы) Вашей истории"
         in_theme_slider: "При выборе этого, история появится в верхней ползунке тем."
         has_disclaimer: "При выборе этого поля отказ от ответственности будет отражаться в верхней или нижней части истории рядом с кнопкой 'делиться ссылками'."
+        country: Select the country(s) your story belongs to.  Allows users to filter stories by a country.
     collaborators:
       title: "Сотрудники '%{title}'"
       owner_header: "Автор истории"

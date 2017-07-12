@@ -46,6 +46,8 @@ class StoriesController < ApplicationController
 #    @story_tags = []
     @themes = Theme.sorted
     @authors = Author.sorted
+    @countries = Country.sorted
+
     @new = true
     respond_to do |format|
         format.html #new.html.er
@@ -63,6 +65,7 @@ class StoriesController < ApplicationController
 #    @story_tags = @item.tags.token_input_tags
     @themes = Theme.sorted
     @authors = Author.sorted
+    @countries = Country.sorted
   end
 
   # POST /stories
@@ -88,6 +91,7 @@ class StoriesController < ApplicationController
         @item.current_locale = @item.story_locale
         @themes = Theme.sorted
         @authors = Author.sorted
+        @countries = Country.sorted
         @new = true
         flash[:error] = I18n.t('app.msgs.error_created', obj:Story.model_name.human, err:@item.errors.full_messages.to_sentence)
         format.html { render action: "new" }
@@ -131,6 +135,7 @@ class StoriesController < ApplicationController
           @item.current_locale = @item.story_locale
           @themes = Theme.sorted
           @authors = Author.sorted
+          @countries = Country.sorted
           #logger.debug "$$$$$$$$$$$$44 story update error: #{@item.errors.full_messages.to_sentence}"
           flash[:error] = u(I18n.t('app.msgs.error_updated', obj:Story.model_name.human, err:@item.errors.full_messages(true).to_sentence))
           format.html { render action: "edit" }
@@ -228,6 +233,7 @@ class StoriesController < ApplicationController
         @to = params.has_key?(:tr_to) ? params[:tr_to] : @languages.select{|x| x.locale != @story.story_locale}.first.locale
       end
     end
+    Rails.logger.debug("--------------------------------------------#{type}type")
     if type == 'story'
       if method=='select'
         @item = @story
@@ -240,6 +246,8 @@ class StoriesController < ApplicationController
       end
       @themes = Theme.sorted
       @authors = Author.sorted
+      @countries = Country.sorted
+       Rails.logger.debug("--------------------------------------------ere")
       type = 'form'
     elsif type == 'section'
       if method=='select'

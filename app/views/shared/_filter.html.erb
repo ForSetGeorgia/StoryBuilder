@@ -33,6 +33,22 @@
           <% end %>
         </ul>
     </li>
+    <li class="dropdown dropdown-hover afilter">
+      <a href="#" class="dropdown-toggle<%= @story_filter_country_all ? '' : ' selected' %>"
+        data-toggle="dropdown" tabindex="18"  title="<%= t('filters.sort_title') %>"
+        data-filtered-by="<%= @story_filter_country_permalink %>" data-filter-type="country"
+        data-filter-default="all"><%= t('helpers.links.countries') %><i class="caret"></i></a>
+        <ul class="dropdown-menu afilter-list">
+           <li class="dropdown">
+          <%= link_to I18n.t('filters.all'), "#", :class => @story_filter_country == I18n.t('filters.all') ? 'active' : '', :"data-filter" => 'all' %>
+        </li>
+          <% @countries_published.each do |item| %>
+            <li class="dropdown">
+              <%= link_to item.name, "#", :class => @story_filter_country == item.name ? 'active' : '', :"data-filter" => item.permalink %>
+            </li>
+          <% end %>
+        </ul>
+    </li>
 
     <% if @story_filter_show_following %>
       <li class="afilter">

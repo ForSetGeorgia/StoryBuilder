@@ -86,6 +86,7 @@ class StoryTranslation < ActiveRecord::Base
   ## Callbacks
   before_save :publish_date
   before_save :shortened_url_generation
+  after_save :update_country_flag
 #  after_save :update_filter_counts
 
   # if the story is being published, record the date
@@ -108,6 +109,11 @@ class StoryTranslation < ActiveRecord::Base
       generate_shortened_url
     end
     return true
+  end
+
+  def update_country_flag
+     Rails.logger.debug("-----------------update_country_flag---------------------------#{self.previous_changes() }")
+     return true
   end
 
   # # if the story published flag changes

@@ -28,6 +28,8 @@ class Story < ActiveRecord::Base
   has_many :story_themes
   has_many :themes, :through => :story_themes, :dependent => :destroy
   has_many :theme_features, :dependent => :destroy
+  has_many :story_countries
+  has_many :countries, :through => :story_countries, :dependent => :destroy
   has_many :story_authors
   has_many :authors, :through => :story_authors, :dependent => :destroy
 	belongs_to :user
@@ -83,6 +85,7 @@ class Story < ActiveRecord::Base
     end
     return true
   end
+
 
   #def process_impression_count
   #  Rails.logger.debug(
@@ -317,6 +320,10 @@ class Story < ActiveRecord::Base
 	  joins(:categories).where('categories.id = ?', id)
 	end
 
+  def self.by_country(id)
+    joins(:countries).where('countries.id = ?', id)
+  end
+
   def self.by_theme(id)
     joins(:themes).where('themes.id = ?', id)
   end
@@ -389,6 +396,15 @@ class Story < ActiveRecord::Base
 
   def self.include_categories
     includes(:categories)
+  end
+
+  # get all of the unique story countries for published stories
+  def self.all_published_countries
+    joins(:story_countries).select('story_countries.country_id').is_published.map{|x| x['country_id']}.uniq.sort
+  end
+
+  def self.include_countries
+    includes(:countries)
   end
 
   #####################################

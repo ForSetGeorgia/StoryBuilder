@@ -20,6 +20,7 @@ en:
       asset: File
       logo: Logo
       highlight: Highlight
+      country: Country
     attributes:
       asset: &asset
         asset_file_name: File
@@ -71,6 +72,7 @@ en:
         story_type: Type
         in_theme_slider: Show Story in Theme Slider
         has_disclaimer: "Include Story Disclaimer?"
+        countries: "Countries"
       story_translation: &story_translation
         title: Story Title
         author: Author(s)
@@ -175,6 +177,9 @@ en:
       category_translation: &category_translation
         name: Name
       category_translations: *category_translation
+      country_translation: &country_translation
+        name: Name
+      country_translation: *country_translation
       page:
         name: Unique name for content (do not change!)
       page_translation: &page_translation
@@ -568,6 +573,8 @@ en:
       likes: Likes
     category_header: Category
     category_title: View stories that belong to a category
+    country_header: Country
+    country_title: View stories that belong to a country
     theme_header: Theme
     theme_title: View stories that belong to a theme
     language_header: Language
@@ -681,6 +688,7 @@ en:
         theme: Select the theme(s) your story belongs to.
         in_theme_slider: "If checked, this story will appear in the slider at the top of the theme page."
         has_disclaimer: "Selecting this field will show the story disclaimer at the top and bottom of the story next to the share links."
+        country: Select the country(s) your story belongs to.  Allows users to filter stories by a country.
     collaborators:
       title: "Collaborators for '%{title}'"
       owner_header: Story Author

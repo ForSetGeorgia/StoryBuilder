@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170710150314) do
+ActiveRecord::Schema.define(:version => 20170711082755) do
 
   create_table "assets", :force => true do |t|
     t.integer  "item_id"
@@ -101,6 +101,28 @@ ActiveRecord::Schema.define(:version => 20170710150314) do
   end
 
   add_index "contents", ["section_id"], :name => "index_contents_on_section_id"
+
+  create_table "countries", :force => true do |t|
+    t.boolean  "has_published_stories", :default => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "countries", ["has_published_stories"], :name => "index_countries_on_has_published_stories"
+
+  create_table "country_translations", :force => true do |t|
+    t.integer  "country_id"
+    t.string   "locale",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "permalink"
+  end
+
+  add_index "country_translations", ["country_id"], :name => "index_country_translations_on_country_id"
+  add_index "country_translations", ["locale"], :name => "index_country_translations_on_locale"
+  add_index "country_translations", ["name"], :name => "index_country_translations_on_name"
+  add_index "country_translations", ["permalink"], :name => "index_country_translations_on_permalink"
 
   create_table "embed_media", :force => true do |t|
     t.integer  "section_id"
@@ -441,6 +463,16 @@ ActiveRecord::Schema.define(:version => 20170710150314) do
 
   add_index "story_categories", ["category_id"], :name => "index_story_categories_on_category_id"
   add_index "story_categories", ["story_id"], :name => "index_story_categories_on_story_id"
+
+  create_table "story_countries", :force => true do |t|
+    t.integer  "story_id"
+    t.integer  "country_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "story_countries", ["country_id"], :name => "index_story_countries_on_country_id"
+  add_index "story_countries", ["story_id"], :name => "index_story_countries_on_story_id"
 
   create_table "story_themes", :force => true do |t|
     t.integer  "story_id"

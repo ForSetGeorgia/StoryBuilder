@@ -20,6 +20,7 @@ ka:
       asset: ფაილი
       logo: ლოგო
       highlight: Highlight
+      country: Country
     attributes:
       asset: &asset
         asset_file_name: ფაილი
@@ -71,6 +72,7 @@ ka:
         story_type: "ტიპი"
         in_theme_slider: "ამბის სლაიდერში ჩვენება"
         has_disclaimer: "Include Story Disclaimer?"
+        countries: "Countries"
       story_translation: &story_translation
         title: "ამბის სათაური"
         author: "ავტორ(ებ)ი"
@@ -175,6 +177,9 @@ ka:
       category_translation: &category_translation
         name: "სახელი"
       category_translations: *category_translation
+      country_translation: &country_translation
+        name: Name
+      country_translation: *country_translation
       page:
         name: "კონტენტის უნიკალური სახელი (არ შეცვალოთ!)"
       page_translation: &page_translation
@@ -568,6 +573,8 @@ ka:
       likes: "მოწონების მიხედვით"
     category_header: "კატეგორია"
     category_title: "იხილეთ ამბები კატეგორიიდან"
+    country_header: Country
+    country_title: View stories that belong to a country
     theme_header: "თემა"
     theme_title: "ამ თემის ამბებოს ნახვა"
     language_header: "ენა"
@@ -681,6 +688,7 @@ ka:
         theme: "აირჩიეთ თემა, რომელსაც თქვენი ამბავი განეკუთვნება"
         in_theme_slider: "თუ მონიშნავთ ეს ამბავი გამოჩნდება სლაიდერში, თემის გვერდის ზედა ნაწილში"
         has_disclaimer: "ამ ველის მონიშვნით ისტორიის თავში და ბოლოში, გასაზიარებელი ღილაკების გვერდით, გამოჩნდება დისქლეიმერი."
+        country: Select the country(s) your story belongs to.  Allows users to filter stories by a country.
     collaborators:
       title: "ამბის '%{title}' თანაავტორები"
       owner_header: "ამბის ავტორი"

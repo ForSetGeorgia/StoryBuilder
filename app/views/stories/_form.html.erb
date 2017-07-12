@@ -71,6 +71,9 @@
 
           <%= f.input :themes, :as => :select, :hint => t('.hint.theme'), :required => true, :collection => @themes.map{|x|[x.formatted_name, x.id]}, :multiple => true, :input_html => { :id => 'storyThemes', :class => "selectpicker", :'data-live-search' => "true", :'data-selected-text-format' => "count>2", :'data-size' => "5", :title => t('app.common.nothing_selected') } %>
 
+
+          <%= f.input :countries, :as => :select, :hint => t('.hint.country'), :collection => @countries.map{|x|[x.name, x.id]}, :multiple => true, :input_html => { :id => 'storyCountries', :class => "selectpicker", :'data-live-search' => "true", :'data-selected-text-format' => "count>2", :'data-size' => "5", :title => t('app.common.nothing_selected') } %>
+
         <% end %>
 
         <% # not used code  %>

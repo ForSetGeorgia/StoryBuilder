@@ -71,6 +71,8 @@ class ApplicationController < ActionController::Base
     @themes_published = Theme.published.with_stories.sorted
     @languages = Language.app_locale_sorted #LANGUAGES # its an array that is initialized at rails app start Language.app_locale_sorted
     @languages_published = @languages.select{|x| x.has_published_stories == true}
+    @countries = Country.sorted
+    @countries_published = @countries.select{|x| x.has_published_stories == true}
 		# @categories = Category.sorted
   #   @categories_published = @categories.select{|x| x.has_published_stories == true}
     @face_id = Rails.env.production? ? ENV['FACEBOOK_APP_ID'] : ENV['FACEBOOK_APP_ID_DEV']
@@ -210,6 +212,21 @@ class ApplicationController < ActionController::Base
     else
       @story_filter_theme = I18n.t("filters.all")
     end
+
+
+    # country
+    @story_filter_country_all = true
+    @story_filter_country_permalink =  ""
+    index = params[:country].present? ? @countries_published.index{|x| x.permalink.downcase == params[:category].downcase} : nil
+    if index.present?
+      countries = story_objects.by_country(@countries_published[index].id)
+      @story_filter_country = @countries_published[index].name
+      @story_filter_country_permalink =  @countries_published[index].permalink
+      @story_filter_country_all = false
+    else
+      @story_filter_country = I18n.t("filters.all")
+    end
+
 
    # staff pick
     #if params[:staff_pick].present?

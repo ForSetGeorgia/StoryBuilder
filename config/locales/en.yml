@@ -208,37 +208,37 @@ en:
         not_provided: 'must be provided.'
   mailer:
     closing: "Sincerely,"
-    signature: The Chai Khana Team
+    signature: The StoryBuilder Team
     unsubscribe: Click here to change your notification settings
     contact:
       contact_form:
-        subject: "Chai Khana Contact Form"
+        subject: "StoryBuilder Contact Form"
     notification:
       new_user:
-        subject: "Welcome to Chai Khana!"
-        message: "Thank you for becoming a member of Chai Khana. We look forward to exploring the stories you build!\n\nWhen you have a chance, please visit your settings page so you can update your avatar, nickname, personal URL, and a summary about yourself: [settings_link].\n\nYou can manage when you would like to receive email notifications from Chai Khana by going to the notifications page: [notifications_link]. "
+        subject: "Welcome to StoryBuilder!"
+        message: "Thank you for becoming a member of StoryBuilder. We look forward to exploring the stories you build!\n\nWhen you have a chance, please visit your settings page so you can update your avatar, nickname, personal URL, and a summary about yourself: [settings_link].\n\nYou can manage when you would like to receive email notifications from StoryBuilder by going to the notifications page: [notifications_link]. "
       published_theme:
-        subject: "New themes have been published on Chai Khana!"
+        subject: "New themes have been published on StoryBuilder!"
         message: "The following themes you have expressed interest in were recently published:"
       published_story:
-        subject: "New stories have been published on Chai Khana!"
+        subject: "New stories have been published on StoryBuilder!"
         message: "The following stories you have expressed interest in were recently published:"
       story_comment:
-        subject: "Someone has posted a comment on your story on Chai Khana!"
+        subject: "Someone has posted a comment on your story on StoryBuilder!"
         message: "The following stories have recently received a comment:"
         comment: "1 Comment"
         comments: "%{num} Comments"
       story_collaboration:
-        subject: "You have been invited to collaborate on a story on Chai Khana!"
-        message: "You have received the following invitations to collaborate on stories with other people on Chai Khana. If you would like to accept the invitation, simply click the 'Accept the Invitation' link. If you want to decline this invitation, no action is needed on your part."
+        subject: "You have been invited to collaborate on a story on StoryBuilder!"
+        message: "You have received the following invitations to collaborate on stories with other people on StoryBuilder. If you would like to accept the invitation, simply click the 'Accept the Invitation' link. If you want to decline this invitation, no action is needed on your part."
         from: From
         role: Role
         story_title: Story Title
         msg: Message
         accept_link: Accept the Invitation
-        all_invitations: View all of your Chai Khana collaboration invitations.
+        all_invitations: View all of your StoryBuilder collaboration invitations.
       processed_videos:
-        subject: "Your videos on Chai Khana have been processed!"
+        subject: "Your videos on StoryBuilder have been processed!"
         message: "The following stories of yours have videos that have completed processing:"
         story_title: 'Story:'
         status: 'Video Processing Status: %{processed} of %{total} completed'
@@ -247,7 +247,7 @@ en:
         none_processed: No vidoes have been processed.
         none_processing: All videos have been processed!
       processed_video_errors:
-        subject: "Videos on Chai Khana have processing errors!"
+        subject: "Videos on StoryBuilder have processing errors!"
         message: "The following videos had errors while being processed:"
         story_id: Story ID
         asset_id: Asset ID
@@ -279,7 +279,7 @@ en:
       sign_up2: Sign Up
       sign_up_question: "Not a member yet?"
       sign_up: "Register now"
-      sign_up_title: Join Chai Khana
+      sign_up_title: Join StoryBuilder
       sign_out: Sign Out
       sign_in_provider: "Sign in with %{provider}"
       sign_up_provider: "Sign up with %{provider}"
@@ -395,14 +395,14 @@ en:
       explore: Explore
       processing: Processing...
     common:
-      app_name_not_trans: Chai Khana
-      app_name: Chai Khana
-      app_intro: Chai Khana is an NGO that provides cross-border journalistic trainings and online publishing for issue-based multi-media coverage in the South Caucasus region.
-      app_intro_meta: Chai Khana is an NGO that provides cross-border journalistic trainings and online publishing for issue-based multi-media coverage in the South Caucasus region.
+      app_name_not_trans: StoryBuilder
+      app_name: StoryBuilder
+      app_intro: Build and Share;the Next Generation Story;StoryBuilder allows anyone with text, pictures and/or videos to<br>combine this content into a creative story that can be published<br> and shared with the world
+      app_intro_meta: Build and Share the Next Generation Story! StoryBuilder allows anyone with text, pictures and/or videos to combine this content into a creative story that can be published and shared with the world
       powered_by: ""
       powered_by_fs: ForSet
       powered_by_end: ""
-      embed_slogan: Build your story with Chai Khana
+      embed_slogan: Build your story with StoryBuilder
       added_on: "Added on: %{date}"
       last_sign_in: "Logged in last: %{date}"
       admin: Admin
@@ -433,10 +433,10 @@ en:
       staff_pick: Staff Pick
       wide: wide
       partial: Link to Story
-      partial_text: Embed a link to the story that has the same look as the story links on the home page of Chai Khana (image, title, author, etc)
+      partial_text: Embed a link to the story that has the same look as the story links on the home page of StoryBuilder (image, title, author, etc)
       full: Full Story
       full_text: Embed the complete story on another website. We suggest you make the width as large as possible to produce the best look.
-      feed: Chai Khana Feeds
+      feed: StoryBuilder Feeds
       home: Home
       required: Required
       nothing_selected: Nothing Selected
@@ -646,9 +646,9 @@ en:
         picked: "Yes"
   root:
     about:
-      title: About Chai Khana
+      title: About StoryBuilder
     embed:
-      home_link: Built on Chai Khana
+      home_link: Built on StoryBuilder
   stories:
     new:
       title: Story Settings Form
@@ -883,9 +883,9 @@ en:
       header_from: Sent By
     notifications:
       title: Notifications
-      explain: You can receive email notifications whenever new stories are published on Chai Khana! Simply sign in to subscribe.
+      explain: You can receive email notifications whenever new stories are published on StoryBuilder! Simply sign in to subscribe.
       all_sub_title: All Notifications
-      all_label: Do you want to recieve any notifications from Chai Khana?
+      all_label: Do you want to recieve any notifications from StoryBuilder?
       all_no: "No, do not send me any notifications."
       all_yes: "Yes, I want notifications sent to me."
       story_comment_sub_title: New Story Comment Notifications
@@ -898,7 +898,7 @@ en:
       new_stories_by_category: "Notify me when a story is added to:"
       language_sub_title: Notification Language
       language_label: In what language do you want to receive the notifications?
-      following_sub_title: Chai Khana Users You Are Following
+      following_sub_title: StoryBuilder Users You Are Following
       following_label: "You will receive notifications whenever a user you are following publishes a story. To not receive notifications from a user, unfollow them by clicking on their image."
       following_not: "At this time, you are not following any users."
       following_title1: "Click to unfollow '%{nickname}'"
@@ -912,7 +912,7 @@ en:
     mailer:
       reset_password_instructions:
         title: 'Hello %{nickname}!'
-        p1: Someone has requested a link to change your password on Chai Khana, and you can do this through the link below.
+        p1: Someone has requested a link to change your password on StoryBuilder, and you can do this through the link below.
         link_title: Change my password
         p2: "If you didn't request this, please ignore this email."
         p3: "Your password won't change until you access the link above and create a new one."

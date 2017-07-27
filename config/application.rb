@@ -38,18 +38,18 @@ module BootstrapStarter
 
     config.i18n.enforce_available_locales = true
 
-    config.i18n.available_locales = [:en, :ka, :hy, :az, :ru]
+    config.i18n.available_locales = [:en, :ka]
 
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    # The default locale is :ka and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = :en
+    config.i18n.default_locale = :ka
 
     # rails will fallback to config.i18n.default_locale translation
     config.i18n.fallbacks = true
 
     # rails will fallback to en, no matter what is set as config.i18n.default_locale
     #config.i18n.fallbacks = [:en]
-    config.i18n.fallbacks = {'az' => 'ru', 'hy' => 'ru', 'ka' => 'en', 'ru' => 'en'}
+    config.i18n.fallbacks = {'en' => 'ka'}
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

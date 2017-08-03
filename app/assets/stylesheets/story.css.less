@@ -1420,6 +1420,9 @@ body
 {
   display:inline-block;
 }
+.info-bottom .country-tags {
+
+}
 .info-bottom .comments
 {
   min-height:160px;
@@ -1487,6 +1490,35 @@ ul.dropdown-menu li a
 {
   text-decoration:none;
   padding: 6px 10px;
+}
+.country-tags {
+  margin:6px 0px;
+  span {
+    font-family: 'dejavusans-el';
+    font-size:14px;
+    color:#353535;
+  }
+  span:lang(en) { font-family: 'opensans-l'; }
+  a {
+    border:1px solid #ebebeb;
+    font-family: 'dejavusans-el';
+    font-size:13px;
+    color:#2b2c27;
+    background-color:#ededed;
+    margin:3px;
+    padding: 5px 10px;
+    width: auto;
+    display: inline-block;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    &:hover {
+      color:#020202;
+      background-color:#dfdddd;
+      cursor:pointer;
+    }
+    &:lang(en) { font-family: 'opensans-l'; }
+  }
 }
 .themes {
   margin:6px 0px;

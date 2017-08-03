@@ -53,9 +53,23 @@
           </div>
         <% end %>
       </div>
+      <div class="info-row">
+        <div class="country-tags">
+          <span><%= t('storyteller.view_all_stories_in') %>&nbsp;</span>
+          <% @story.countries.each { |t| %>
+            <%= link_to t.name, root_path(country: t.permalink.downcase) %>
+          <% } %>
+          <% if false %>
+            <% @story.categories.each { |t| %>
+              <%= link_to t.name, root_path(category: t.permalink.downcase) %>
+            <% } %>
+          <% end %>
+        </div>
+      </div>
       <div class="comments">
         <div class="fb-comments" data-href="<%= storyteller_show_url(:id=>@story.permalink,:sl => @story.current_locale) %>" data-num-posts="5" data-width="100%" id="fbComments"></div>
       </div>
+
       <% if !@stories.blank? %>
         <div class="related-links">
           <div class="h1"><%= t('storyteller.related_stories') %></div>

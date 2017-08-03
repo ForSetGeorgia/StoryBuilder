@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   PER_PAGE_COUNT = 8
   DEVISE_CONTROLLERS = ['devise/sessions', 'devise/registrations', 'devise/passwords']
 
+  before_filter :load_application_configuration
 	before_filter :set_locale
 	before_filter :is_browser_supported?
 	before_filter :preload_global_variables
@@ -53,6 +54,40 @@ class ApplicationController < ActionController::Base
 # 		end
 	end
 
+  # load all application settings that defines which feature should be on/off
+  def load_application_configuration
+
+    required_configs = Config.required_keys
+    @config = {}
+    Config.all.each{|e|
+      key = e.key.to_sym
+      value = e.value
+
+      required_configs.delete(key)
+
+      @config[key] = e.value
+      instance_variable_set("@config_#{e.key}".to_sym, e.value)
+      @config["_#{e.key}".to_sym] = { value: e.value, input_type: e.input_type, possible_values: JSON.parse(e.possible_values) }
+
+      case key
+        when :author
+          @config_is_author_simple = value == 'simple'
+          @config_is_author_complex = !@config_is_author_simple
+          Rails.logger.debug("--------------------------------------#{@config_is_author_complex}------#{key} #{value}")
+        when :category_publishable
+        else
+      end
+
+    }
+
+
+    # Rails.logger.debug("--------------------------------------------#{@config_is_author_complex}")
+    if required_configs.present?
+      exception = StandardError.new("Missing required application configuration key: #{missing_keys.join(', ')}")
+      exception.set_backtrace(caller)
+      render_error(exception)
+    end
+  end
 
 	def set_locale
     if params[:locale] and I18n.available_locales.include?(params[:locale].to_sym)

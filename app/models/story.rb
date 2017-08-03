@@ -3,7 +3,7 @@ class Story < ActiveRecord::Base
 
   @@TYPE = {story: 1, talk_show: 2, video: 3, photo: 4, infographic: 5}
 
-	translates :shortened_url, :title, :permalink, :permalink_staging, :media_author, :about,
+	translates :shortened_url, :title, :permalink, :permalink_staging, :author, :media_author, :about,
               :published, :published_at, :language_type, :translation_percent_complete, :translation_author
 
   # for likes
@@ -61,7 +61,7 @@ class Story < ActiveRecord::Base
   validates :story_type_id, :presence => true
 	validates :template_id, :presence => true
 	validates :story_locale, :presence => true
-  validates :authors, :length => { :minimum => 1, message: I18n.t('activerecord.errors.messages.story_authors')}
+  validates :authors, :length => { :minimum => 1, message: I18n.t('activerecord.errors.messages.story_authors')}, if: Proc.new { |a| @config_is_author_complex }
   validates :themes, :length => { :minimum => 1, message: I18n.t('activerecord.errors.messages.not_provided')}
   # validates :user_id, :presence => true
 

@@ -315,6 +315,7 @@ if !Rails.env.production?
 end
 
 
+
 =begin OLD STUFF FROM STORYBUILDER
 
 #####################
@@ -480,3 +481,11 @@ cat.category_translations.create(:locale => 'en', :name => 'Science')
 Category.update_counts
 
 =end
+
+
+#####################
+## Configs
+#####################
+puts "Loading Configs"
+Config.delete_all
+Config.create(:key => '', :name => '')

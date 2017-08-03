@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170710150314) do
+ActiveRecord::Schema.define(:version => 20170803095810) do
 
   create_table "assets", :force => true do |t|
     t.integer  "item_id"
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(:version => 20170710150314) do
   add_index "category_translations", ["name"], :name => "index_category_translations_on_name"
   add_index "category_translations", ["permalink"], :name => "index_category_translations_on_permalink"
 
+  create_table "configs", :force => true do |t|
+    t.string   "key",             :null => false
+    t.string   "value"
+    t.string   "input_type",      :null => false
+    t.string   "possible_values"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "content_translations", :force => true do |t|
     t.integer  "content_id"
     t.string   "locale",                     :null => false
@@ -101,6 +110,28 @@ ActiveRecord::Schema.define(:version => 20170710150314) do
   end
 
   add_index "contents", ["section_id"], :name => "index_contents_on_section_id"
+
+  create_table "countries", :force => true do |t|
+    t.boolean  "has_published_stories", :default => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "countries", ["has_published_stories"], :name => "index_countries_on_has_published_stories"
+
+  create_table "country_translations", :force => true do |t|
+    t.integer  "country_id"
+    t.string   "locale",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "permalink"
+  end
+
+  add_index "country_translations", ["country_id"], :name => "index_country_translations_on_country_id"
+  add_index "country_translations", ["locale"], :name => "index_country_translations_on_locale"
+  add_index "country_translations", ["name"], :name => "index_country_translations_on_name"
+  add_index "country_translations", ["permalink"], :name => "index_country_translations_on_permalink"
 
   create_table "embed_media", :force => true do |t|
     t.integer  "section_id"
@@ -156,6 +187,31 @@ ActiveRecord::Schema.define(:version => 20170710150314) do
   end
 
   add_index "highlights", ["picked"], :name => "index_highlights_on_picked"
+
+  create_table "impressions", :force => true do |t|
+    t.string   "impressionable_type"
+    t.integer  "impressionable_id"
+    t.integer  "user_id"
+    t.string   "controller_name"
+    t.string   "action_name"
+    t.string   "view_name"
+    t.string   "request_hash"
+    t.string   "ip_address"
+    t.string   "session_hash"
+    t.text     "message"
+    t.text     "referrer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], :name => "controlleraction_ip_index"
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], :name => "controlleraction_request_index"
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], :name => "controlleraction_session_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], :name => "poly_ip_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], :name => "poly_request_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], :name => "poly_session_index"
+  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], :name => "impressionable_type_message_index", :length => {"impressionable_type"=>nil, "message"=>255, "impressionable_id"=>nil}
+  add_index "impressions", ["user_id"], :name => "index_impressions_on_user_id"
 
   create_table "infographic_datasources", :force => true do |t|
     t.integer  "infographic_translation_id"
@@ -441,6 +497,16 @@ ActiveRecord::Schema.define(:version => 20170710150314) do
 
   add_index "story_categories", ["category_id"], :name => "index_story_categories_on_category_id"
   add_index "story_categories", ["story_id"], :name => "index_story_categories_on_story_id"
+
+  create_table "story_countries", :force => true do |t|
+    t.integer  "story_id"
+    t.integer  "country_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "story_countries", ["country_id"], :name => "index_story_countries_on_country_id"
+  add_index "story_countries", ["story_id"], :name => "index_story_countries_on_story_id"
 
   create_table "story_themes", :force => true do |t|
     t.integer  "story_id"

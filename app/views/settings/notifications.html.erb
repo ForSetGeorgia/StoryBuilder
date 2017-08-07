@@ -53,30 +53,30 @@
 			</div>
 		</div>
 
-
-		<h3><%= t('.following_sub_title') %></h3>
-		<div class="section" id="following_notifications">
-			<%= t('.following_label') %>
-			<% if @following_authors.present? %>
-			  <ul id="following_user_list">
-			    <% @following_authors.each do |author| %>
-			      <li title="<%= t('.following_title1', :nickname => author.name) %>"
-			          data-follow="<%= t('.following_title2', :nickname => author.name) %>"
-			          data-unfollow="<%= t('.following_title1', :nickname => author.name) %>">
-	            <%= image_tag author.avatar_url(:'50x50'), :size=>"50x50", :alt => author.name %>
-	    				<%= hidden_field_tag "following[#{author.id}][name]", author.name %>
-				      <%= radio_button_tag "following[#{author.id}][wants]", 'true', true %>
-				      <%= radio_button_tag "following[#{author.id}][wants]", 'false', false %>
-			      </li>
-			    <% end %>
-		    </ul>
-			<% else %>
-			  <p>
-	  		  <%= t('.following_not') %>
-			  </p>
-			<% end %>
-		</div>
-
+		<% if $_flag[:is_author_complex] %>
+			<h3><%= t('.following_sub_title') %></h3>
+			<div class="section" id="following_notifications">
+				<%= t('.following_label') %>
+				<% if @following_authors.present? %>
+				  <ul id="following_user_list">
+				    <% @following_authors.each do |author| %>
+				      <li title="<%= t('.following_title1', :nickname => author.name) %>"
+				          data-follow="<%= t('.following_title2', :nickname => author.name) %>"
+				          data-unfollow="<%= t('.following_title1', :nickname => author.name) %>">
+		            <%= image_tag author.avatar_url(:'50x50'), :size=>"50x50", :alt => author.name %>
+		    				<%= hidden_field_tag "following[#{author.id}][name]", author.name %>
+					      <%= radio_button_tag "following[#{author.id}][wants]", 'true', true %>
+					      <%= radio_button_tag "following[#{author.id}][wants]", 'false', false %>
+				      </li>
+				    <% end %>
+			    </ul>
+				<% else %>
+				  <p>
+		  		  <%= t('.following_not') %>
+				  </p>
+				<% end %>
+			</div>
+		<% end %>
 
 		<div>
 			<%= submit_tag t('.submit'), :class => 'btn btn-default' %>

@@ -12,8 +12,11 @@ class Story < ActiveRecord::Base
   # tagging system
   acts_as_taggable
 
+  scoped_search_fields = [:title, :author, :media_author, :translation_author] if $_flag[:is_author_simple] # configurable section [author][simple]
+  scoped_search_fields = [:title, :media_author, :translation_author] if $_flag[:is_author_complex] # configurable section [author][complex]
+
   # fields to search for in a story
-  scoped_search :in => :story_translations, :on => [:title, :media_author, :translation_author]
+  scoped_search :in => :story_translations, :on => scoped_search_fields
   scoped_search :in => :content_translations, :on => [:caption, :sub_caption, :text]
 
   # record public views
@@ -61,7 +64,9 @@ class Story < ActiveRecord::Base
   validates :story_type_id, :presence => true
 	validates :template_id, :presence => true
 	validates :story_locale, :presence => true
-  validates :authors, :length => { :minimum => 1, message: I18n.t('activerecord.errors.messages.story_authors')}, if: Proc.new { |a| @config_is_author_complex }
+  validates :authors,
+    :length => { :minimum => 1, message: I18n.t('activerecord.errors.messages.story_authors')},
+     if: Proc.new { |a| $_flag[:is_author_complex] } # configurable section [author][complex]
   validates :themes, :length => { :minimum => 1, message: I18n.t('activerecord.errors.messages.not_provided')}
   # validates :user_id, :presence => true
 
@@ -687,7 +692,11 @@ class Story < ActiveRecord::Base
 
   # get nicely formatted list of author names
   def story_author_names
-    self.authors.map{|x| x.name}.to_sentence
+    if $_flag[:is_author_simple] # configurable section [author][simple]
+      self.author
+    elsif $_flag[:is_author_complex] # configurable section [author][complex] %>
+      self.authors.map{|x| x.name}.to_sentence
+    end
   end
 
 private

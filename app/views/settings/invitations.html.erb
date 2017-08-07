@@ -22,7 +22,7 @@
           <td>
             <%= invitation.role_name %>
             <% if invitation.role == Story::ROLE[:translator] && invitation.translation_locales.present?%>
-              <%= ' - ' %>             
+              <%= ' - ' %>
               <% locales = invitation.translation_locales.split(',') %>
               <% locales.each_with_index do |locale, locale_index| %>
                 <% lang = @languages.select{|x| x.locale == locale}.first %>

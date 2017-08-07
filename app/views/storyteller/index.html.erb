@@ -22,23 +22,25 @@
   <% if !@export %>
     <div class="info-bottom">
       <div class="info-row">
-        <div class="l">
-          <div class='authors'>
-              <% @story.authors.each{|t| %>
-                <div class='author js-u-dib'>
-                  <div class='avatar'>
-                    <%= link_to image_tag(t.avatar_url, :class=>"avatar"),  author_path(t.permalink), :class => "avatar", :"data-toggle"=>"dropdown" %>
+        <% if $_flag[:is_author_complex] # configurable section [author][complex] %>
+          <div class="l">
+            <div class='authors'>
+                <% @story.authors.each{|t| %>
+                  <div class='author js-u-dib'>
+                    <div class='avatar'>
+                      <%= link_to image_tag(t.avatar_url, :class=>"avatar"),  author_path(t.permalink), :class => "avatar", :"data-toggle"=>"dropdown" %>
+                    </div>
+                    <div class='name'>
+                      <%= link_to t.name, author_path(t.permalink), :title => t.name %>
+                    </div>
+                    <div class="follow">
+                      <%= render partial: 'layouts/follow_link', locals: {:locale => @story.current_locale, :user_id => t.id, :is_story_page => true, :page_to_return_to => storyteller_show_path(:id => @story.permalink, :process_follow => true)} %>
+                    </div>
                   </div>
-                  <div class='name'>
-                    <%= link_to t.name, author_path(t.permalink), :title => t.name %>
-                  </div>
-                  <div class="follow">
-                    <%= render partial: 'layouts/follow_link', locals: {:locale => @story.current_locale, :user_id => t.id, :is_story_page => true, :page_to_return_to => storyteller_show_path(:id => @story.permalink, :process_follow => true)} %>
-                  </div>
-                </div>
-              <% } %>
+                <% } %>
+            </div>
           </div>
-        </div>
+        <% end %>
 
         <% if @section_count != 1 %>
           <div class="r">

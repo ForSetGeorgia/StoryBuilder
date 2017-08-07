@@ -1,0 +1,9 @@
+---
+- :key: author
+  :value: complex
+  :input_type: radio
+  :possible_values: '["simple","complex"]'
+- :key: category_publishable
+  :value: 'true'
+  :input_type: boolean
+  :possible_values: "[true,false]"

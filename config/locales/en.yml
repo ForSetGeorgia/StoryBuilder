@@ -20,6 +20,7 @@ en:
       asset: File
       logo: Logo
       highlight: Highlight
+      config: Application Configuration
     attributes:
       asset: &asset
         asset_file_name: File
@@ -289,6 +290,7 @@ en:
       users: Users
       authors: Authors
       highlights: Highlights
+      configs: Application Configuration
       feedback: Feedback
       about: About
       rss: RSS

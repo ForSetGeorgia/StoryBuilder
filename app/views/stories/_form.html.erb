@@ -51,15 +51,10 @@
 
         <%= f_translation.input :permalink, :as => :hidden, :input_html => { id: (!isTO ? "storyPermalink" : nil)  }   %>
         <div class="string form-group stringish story_permalink" <%= !isTO ? 'id=story_permalink' : ''%>>&nbsp;</div>
-
-        <%= @config_is_author_simple %>
-        <%= '---' %>
-        <%= @config_is_author_complex %>
         <% if !@trans %>
-          <% if @config_is_author_simple %>
+          <% if $_flag[:is_author_simple] # configurable section [author][simple]%>
             <%= f.input :author, hint: t('.hint.author'), placeholder: t('.placeholder.author'), :input_html => { id: "storyAuthor"  } %>
-          <% end %>
-          <% if @config_is_author_complex %>
+          <% elsif $_flag[:is_author_complex] # configurable section [author][complex] %>
             <%= f.input :authors, :as => :select, :hint => t('.hint.author'), :required => true, :collection => @authors.map{|x|[x.name, x.id]}, :multiple => true, :input_html => { :id => 'storyAuthors', :class => "selectpicker", :'data-live-search' => "true", :'data-selected-text-format' => "count>2", :'data-size' => "5", :title => t('app.common.nothing_selected') } %>
           <% end %>
 

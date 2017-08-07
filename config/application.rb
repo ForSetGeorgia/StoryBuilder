@@ -68,7 +68,7 @@ module BootstrapStarter
 
     # in app/assets folder
     config.assets.precompile += %w( collaborators.js filter.js follow.js logos.js modalos.js news.js nickname.js search.js settings.js story.js stories.js storyteller.js themes.js )
-    config.assets.precompile += %w( about.css author.css authors.css collaborators.css embed.css filter.css grid.css grid2.css logos.css modalos.css navbar.css navbar2.css news.css root.css settings.css story.css stories.css storyteller.css themes.css todo.css highcharts.css highlights.css)
+    config.assets.precompile += %w( about.css author.css authors.css collaborators.css embed.css filter.css grid.css grid2.css logos.css modalos.css navbar.css navbar2.css news.css root.css settings.css story.css stories.css storyteller.css themes.css todo.css highcharts.css highlights.css configs.css)
     # in vendor/assets folder
     config.assets.precompile += %w( bootstrap-select.min.js jquery.tokeninput.js olly.js zeroclipboard.min.js jquery.tipsy.js )
     config.assets.precompile += %w( bootstrap-select.min.css jquery-ui-1.7.3.custom.css token-input-facebook.css tipsy.css)
@@ -96,5 +96,15 @@ module BootstrapStarter
     # compress all html/json responses
     config.middleware.use Rack::Deflater
 
+    require "#{Rails.root}/config/config.rb"
+
+    config.after_initialize do
+      if ActiveRecord::Base.connection.table_exists? 'configs'
+        Config.destroy_all
+        $_config.each{|k,v|
+          Config.create({ key: k, value: v[:value], input_type: v[:input_type], possible_values: v[:possible_values] })
+        }
+      end
+    end
   end
 end

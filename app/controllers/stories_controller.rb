@@ -45,7 +45,7 @@ class StoriesController < ApplicationController
 #    @templates = Template.select_list
 #    @story_tags = []
     @themes = Theme.sorted
-    @authors = Author.sorted
+    @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
     @new = true
     respond_to do |format|
         format.html #new.html.er
@@ -62,7 +62,7 @@ class StoriesController < ApplicationController
 #    @templates = Template.select_list(@item.template_id)
 #    @story_tags = @item.tags.token_input_tags
     @themes = Theme.sorted
-    @authors = Author.sorted
+    @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
   end
 
   # POST /stories
@@ -87,7 +87,7 @@ class StoriesController < ApplicationController
 #        @story_tags = @item.tags.token_input_tags
         @item.current_locale = @item.story_locale
         @themes = Theme.sorted
-        @authors = Author.sorted
+        @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
         @new = true
         flash[:error] = I18n.t('app.msgs.error_created', obj:Story.model_name.human, err:@item.errors.full_messages.to_sentence)
         format.html { render action: "new" }
@@ -130,7 +130,7 @@ class StoriesController < ApplicationController
 #          @story_tags = @item.tags.token_input_tags
           @item.current_locale = @item.story_locale
           @themes = Theme.sorted
-          @authors = Author.sorted
+          @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
           #logger.debug "$$$$$$$$$$$$44 story update error: #{@item.errors.full_messages.to_sentence}"
           flash[:error] = u(I18n.t('app.msgs.error_updated', obj:Story.model_name.human, err:@item.errors.full_messages(true).to_sentence))
           format.html { render action: "edit" }
@@ -239,7 +239,7 @@ class StoriesController < ApplicationController
         # @item.build_asset(:asset_type => Asset::TYPE[:story_thumbnail])
       end
       @themes = Theme.sorted
-      @authors = Author.sorted
+      @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
       type = 'form'
     elsif type == 'section'
       if method=='select'

@@ -23,7 +23,8 @@ class StoryTranslation < ActiveRecord::Base
   #################################
   ## Validations
   validates :title, :presence => true, length: { maximum: 100 }
-  validates :author, :presence => true, length: { maximum: 255 }, if: Proc.new { |a| @config_is_author_simple }
+  validates :author, :presence => true, length: { maximum: 255 },
+    if: Proc.new { |a| $_flag[:is_author_simple] } # configurable section [author][simple]
   validates :permalink, :presence => true
   validates :media_author, length: { maximum: 255 }
   validates :translation_author, length: { maximum: 255 }

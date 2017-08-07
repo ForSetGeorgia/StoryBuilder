@@ -32,7 +32,7 @@ BootstrapStarter::Application.routes.draw do
 				  get :preview
 			  end
 		  end
-		  resources :configs
+		  resources :configs, :only => [:index, :edit, :update]
 		end
 
 		#get 'tinymce_assets' ,to: 'tinymceassets#index'

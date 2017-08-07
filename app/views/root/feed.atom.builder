@@ -10,11 +10,14 @@ atom_feed do |feed|
       item.categories.map {|t|
         entry.category term: t.permalink.downcase, label: t.name, scheme: feed_path(:category => t.permalink.downcase )
       }
-      # entry.author do |author|
-      #   author.name item.author
-      # end
-      entry.authors do |author|
-        item.authors.each { |a| author.name a.name }
+       if $_flag[:is_author_simple] # configurable section [author][simple]
+        entry.author do |author|
+          author.name item.author
+        end
+      elsif $_flag[:is_author_complex] # configurable section [author][complex]
+        entry.authors do |author|
+          item.authors.each { |a| author.name a.name }
+        end
       end
       #entry.logo image_tag(item.show_asset.file.url(:thumbnail)).html_safe
     end

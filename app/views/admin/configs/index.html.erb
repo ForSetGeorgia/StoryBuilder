@@ -1,0 +1,35 @@
+<%- model_class = Config -%>
+<% title t '.title', :default => model_class.model_name.human.pluralize %>
+
+<div>
+  <%= link_to t('helpers.links.admin'), admin_path,
+  :class => 'btn btn-default' %>
+</div>
+
+<table id="config-datatable" class="table table-striped display">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:key) %></th>
+      <th><%= model_class.human_attribute_name(:value) %></th>
+      <th><%= model_class.human_attribute_name(:input_type) %></th>
+      <th><%= model_class.human_attribute_name(:possible_values) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.key %></td>
+        <td><%= item.value %></td>
+        <td><%= item.input_type %></td>
+        <td><%= item.possible_values %></td>
+        <td>
+          <%= link_to t('app.buttons.edit'),
+                      edit_admin_config_path(item), :class => 'btn btn-xs btn-default' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

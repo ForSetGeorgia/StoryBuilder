@@ -44,4 +44,13 @@ $(document).ready(function(){
        { orderable: false, targets: [0,-1] }
     ]
   });
+  $('#config-datatable').dataTable({
+    "order": [[0, 'asc']],
+    "language": {
+      "url": gon.datatable_i18n_url
+    },
+    "columnDefs": [
+       { orderable: false, targets: [-1] }
+    ]
+  });
 });

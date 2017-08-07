@@ -7,14 +7,6 @@ class CreateConfigTable < ActiveRecord::Migration
       t.string :possible_values
       t.timestamps
     end
-
-    Config.create({key: 'author', value: 'complex', input_type: 'radio', possible_values: '["simple","complex"]'})
-    Config.create({key: 'category_publishable', value: 'true', input_type: 'boolean', possible_values: "[true,false]"})
-
-    # require 'json'
-    # text = '{"one":1,"two":2}'
-    # data = JSON.parse(text)
-
   end
 
   def down

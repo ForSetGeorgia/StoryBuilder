@@ -19,6 +19,7 @@ class RootController < ApplicationController
 
 
   def author
+    redirect_to root_path, :notice => t('app.msgs.does_not_exist') if $_flag[:is_author_complex] # configurable section [author][complex]
     @author = Author.find_by_permalink(params[:user_id])
 
     if @author.present?

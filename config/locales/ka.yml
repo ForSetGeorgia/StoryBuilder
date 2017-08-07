@@ -20,6 +20,7 @@ ka:
       asset: ფაილი
       logo: ლოგო
       highlight: Highlight
+      config: Application Configuration
     attributes:
       asset: &asset
         asset_file_name: ფაილი
@@ -289,6 +290,7 @@ ka:
       users: "მომხმარებლები"
       authors: "ავტორი"
       highlights: Highlights
+      configs: Application Configuration
       feedback: "მოგვწერე"
       about: "ჩვენ შესახებ"
       rss: RSS-ი

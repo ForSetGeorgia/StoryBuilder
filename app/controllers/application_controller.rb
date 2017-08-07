@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   PER_PAGE_COUNT = 8
   DEVISE_CONTROLLERS = ['devise/sessions', 'devise/registrations', 'devise/passwords']
 
-  before_filter :load_application_configuration
 	before_filter :set_locale
 	before_filter :is_browser_supported?
 	before_filter :preload_global_variables
@@ -55,39 +54,39 @@ class ApplicationController < ActionController::Base
 	end
 
   # load all application settings that defines which feature should be on/off
-  def load_application_configuration
+  # def load_application_configuration
+  #    Rails.logger.debug("--------------------------------------------#{$config}")
+  #   $_flag = {}
+  #   required_configs = Config.required_keys
+  #   # @config = {}
+  #   Config.all.each{|e|
+  #     key = e.key.to_sym
+  #     value = e.value
 
-    required_configs = Config.required_keys
-    @config = {}
-    Config.all.each{|e|
-      key = e.key.to_sym
-      value = e.value
+  #     required_configs.delete(key)
 
-      required_configs.delete(key)
+  #     $_flag[key] = e.value
+  #     # instance_variable_set("@config_#{e.key}".to_sym, e.value)
+  #     # @config["_#{e.key}".to_sym] = { value: e.value, input_type: e.input_type, possible_values: JSON.parse(e.possible_values) }
 
-      @config[key] = e.value
-      instance_variable_set("@config_#{e.key}".to_sym, e.value)
-      @config["_#{e.key}".to_sym] = { value: e.value, input_type: e.input_type, possible_values: JSON.parse(e.possible_values) }
+  #     case key
+  #       when :author
+  #         $_flag[:is_author_simple] = value == 'simple'
+  #         $_flag[:is_author_complex] = !$_flag[:is_author_simple]
+  #       when :category_publishable
+  #       else
+  #     end
 
-      case key
-        when :author
-          @config_is_author_simple = value == 'simple'
-          @config_is_author_complex = !@config_is_author_simple
-          Rails.logger.debug("--------------------------------------#{@config_is_author_complex}------#{key} #{value}")
-        when :category_publishable
-        else
-      end
-
-    }
+  #   }
 
 
-    # Rails.logger.debug("--------------------------------------------#{@config_is_author_complex}")
-    if required_configs.present?
-      exception = StandardError.new("Missing required application configuration key: #{missing_keys.join(', ')}")
-      exception.set_backtrace(caller)
-      render_error(exception)
-    end
-  end
+  #   # Rails.logger.debug("--------------------------------------------#{@config_is_author_complex}")
+  #   if required_configs.present?
+  #     exception = StandardError.new("Missing required application configuration key: #{missing_keys.join(', ')}")
+  #     exception.set_backtrace(caller)
+  #     render_error(exception)
+  #   end
+  # end
 
 	def set_locale
     if params[:locale] and I18n.available_locales.include?(params[:locale].to_sym)
@@ -181,8 +180,12 @@ class ApplicationController < ActionController::Base
     if params[:q].present?
       # story_objects = story_objects.search_for(params[:q])
       story_ids = (story_objects.search_for(params[:q])).map(&:id) #.pluck(:id)
-      author_ids = Author.search_for(params[:q]).map(&:id)
-      story_ids += story_objects.joins(:authors).where(:authors => {:id => author_ids}).pluck(:id)
+
+      if $_flag[:is_author_complex] # configurable section [author][complex]
+        author_ids = Author.search_for(params[:q]).map(&:id)
+        story_ids += story_objects.joins(:authors).where(:authors => {:id => author_ids}).pluck(:id)
+      end
+
       story_objects = Story.where(id: story_ids)
 
       gon.q = params[:q]
@@ -295,14 +298,17 @@ class ApplicationController < ActionController::Base
     #end
 
     # following users
-    @story_filter_show_following = user_signed_in? && controller_action?('root','index')
-    if user_signed_in?
-      @following_authors = current_user.following_authors
-      if @following_authors.present? && params[:following].present? && params[:following].to_bool == true
-        story_objects = story_objects.by_authors(@following_authors.map{|x| x.id}.uniq)
-        @story_filter_following = true
-      else
-        @story_filter_following = false
+
+    if $_flag[:is_author_complex] # configurable section [author][complex]
+      @story_filter_show_following = user_signed_in? && controller_action?('root','index')
+      if user_signed_in?
+        @following_authors = current_user.following_authors
+        if @following_authors.present? && params[:following].present? && params[:following].to_bool == true
+          story_objects = story_objects.by_authors(@following_authors.map{|x| x.id}.uniq)
+          @story_filter_following = true
+        else
+          @story_filter_following = false
+        end
       end
     end
      # logger.debug "/////////////////// @story_filter_following = #{@story_filter_following}"

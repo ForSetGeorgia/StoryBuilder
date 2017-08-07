@@ -1,16 +1,10 @@
 <% title t('.title') %>
  <div class="js-list-basic">
 	<ul>
-    <li>
-     <%= link_to t('helpers.links.highlights'), admin_highlights_path %>
-    </li>
-    <li>
-     <%= link_to t('helpers.links.authors'), admin_authors_path %>
-    </li>
-    <li>
-     <%= link_to t('helpers.links.logos'), admin_logos_path %>
-    </li>
     <% if current_user.role? User::ROLES[:site_admin] %>
+      <li>
+       <%= link_to t('helpers.links.configs'), admin_configs_path %>
+      </li>
       <li>
        <%= link_to t('helpers.links.users'), admin_users_path %>
       </li>
@@ -29,5 +23,16 @@
         </li>
       <% end %>
     <% end %>
+    <li>
+     <%= link_to t('helpers.links.highlights'), admin_highlights_path %>
+    </li>
+    <% if $_flag[:is_author_complex] # configurable section [author][complex] %>
+      <li>
+       <%= link_to t('helpers.links.authors'), admin_authors_path %>
+      </li>
+    <% end %>
+    <li>
+     <%= link_to t('helpers.links.logos'), admin_logos_path %>
+    </li>
 	</ul>
 </div>

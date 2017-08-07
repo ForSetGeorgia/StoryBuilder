@@ -38,7 +38,10 @@ class StorytellerController < ApplicationController
         # record if the user has liked this story
         @user_likes = false
         @user_likes = current_user.voted_up_on? @story if user_signed_in?
-        @is_following = Notification.already_following_user(current_user.id, @story.author_ids) if user_signed_in?
+
+        if $_flag[:is_author_complex] # configurable section [author][complex]
+          @is_following = Notification.already_following_user(current_user.id, @story.author_ids) if user_signed_in?
+        end
 
         @no_nav = true if params[:n] == 'n'
 

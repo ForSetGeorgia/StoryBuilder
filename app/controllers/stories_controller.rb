@@ -60,7 +60,6 @@ class StoriesController < ApplicationController
     #   @item.build_asset(:asset_type => Asset::TYPE[:story_thumbnail])
     # end
     # @templates = Template.select_list(@item.template_id)
-     Rails.logger.debug("--------------------------------------------#{@story_tags}")
     @story_tags = @item.tags.token_input_tags
     @themes = Theme.sorted
     @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]

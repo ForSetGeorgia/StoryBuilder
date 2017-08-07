@@ -86,8 +86,9 @@
         <% end %>
         <% # not used code end %>
 
-        <%= f.input :tag_list, hint: t('.hint.tag_list'), :input_html => { id: "storyTagList", :data => { load: @story_tags}  } %>
-
+        <% if $_flag[:has_tag] %>
+          <%= f.input :tag_list, hint: t('.hint.tag_list'), :input_html => { id: "storyTagList", :data => { load: @story_tags}  } %>
+        <% end %>
         <%
           asset_record = trans_record.asset
           if asset_record.blank?

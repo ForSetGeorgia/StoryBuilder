@@ -55,42 +55,47 @@
           </div>
         <% end %>
       </div>
-      <div class="info-row">
-        <div class="tag-list">
-          <span><%= I18n.t('helpers.links.tags') %>:</span>
-          <%= raw @story.tag_list.map { |t| link_to t.titlecase, root_path(:tag => t.downcase), :class=>"tag" }.join('') %>
-        </div>
-      </div>
-      <div class="comments">
-        <div class="fb-comments" data-href="<%= storyteller_show_url(:id=>@story.permalink,:sl => @story.current_locale) %>" data-num-posts="5" data-width="100%" id="fbComments"></div>
-      </div>
-      <% if !@stories.blank? %>
-        <div class="related-links">
-          <div class="h1"><%= t('storyteller.related_stories') %></div>
-          <div class="themes">
-            <span><%= t('storyteller.view_all_stories_in') %>&nbsp;</span>
-            <% @story.themes.published.each { |t| %>
-              <%= link_to t.name.split.map(&:capitalize).join(' '), theme_path(t.permalink) %>
-            <% } %>
+      <% if $_flag[:has_tag] %>
+        <div class="info-row">
+          <div class="tag-list">
+            <span><%= I18n.t('helpers.links.tags') %>:</span>
+            <%= raw @story.tag_list.map { |t| link_to t.titlecase, root_path(:tag => t.downcase), :class=>"tag" }.join('') %>
           </div>
         </div>
       <% end %>
+      <div class="comments">
+        <div class="fb-comments" data-href="<%= storyteller_show_url(:id=>@story.permalink,:sl => @story.current_locale) %>" data-num-posts="5" data-width="100%" id="fbComments"></div>
+      </div>
+      <% if $_flag[:has_related_story] %>
+        <% if !@stories.blank? %>
+          <div class="related-links">
+            <div class="h1"><%= t('storyteller.related_stories') %></div>
+            <div class="themes">
+              <span><%= t('storyteller.view_all_stories_in') %>&nbsp;</span>
+              <% @story.themes.published.each { |t| %>
+                <%= link_to t.name.split.map(&:capitalize).join(' '), theme_path(t.permalink) %>
+              <% } %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
 
-
-  <% if !@stories.blank? %>
-    <div class="related-stories">
-      <div class="grid-wrapper">
-        <div class="grid col-4">
-          <% @stories.each_with_index do |story,s_i| %>
-            <% story.set_to_app_locale %>
-            <div class="col n-3" lang="<%= story.current_locale %>">
-              <%= render partial: "shared/grid_item" , locals:{:story=>story} %>
-            </div>
-          <% end %>
+  <% if $_flag[:has_related_story] %>
+    <% if !@stories.blank? %>
+      <div class="related-stories">
+        <div class="grid-wrapper">
+          <div class="grid col-4">
+            <% @stories.each_with_index do |story,s_i| %>
+              <% story.set_to_app_locale %>
+              <div class="col n-3" lang="<%= story.current_locale %>">
+                <%= render partial: "shared/grid_item" , locals:{:story=>story} %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
   <div class="footer story">
        <%= link_to(image_tag("svg/slogo.svg",:style=>"vertical-align:middle;",:alt=>t('app.common.app_name_not_trans')) , root_path(:locale => I18n.locale), title: t('app.common.app_name'), :class=>"slogo-bottom") %>

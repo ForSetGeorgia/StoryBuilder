@@ -275,13 +275,14 @@ class ApplicationController < ActionController::Base
     # end
 
     #tags
-    if params[:tag].present?
-     story_objects = story_objects.tagged_with(params[:tag])
-  		@story_filter_tag = params[:tag].titlecase
-    else
-  		@story_filter_tag = I18n.t("filters.all")
+    if $_flag[:has_tag]
+      if params[:tag].present?
+       story_objects = story_objects.tagged_with(params[:tag])
+    		@story_filter_tag = params[:tag].titlecase
+      else
+    		@story_filter_tag = I18n.t("filters.all")
+      end
     end
-
     # language
     #@story_filter_language_permalink =  ""
     #index = params[:language].present? ? @languages_published.index{|x| x.locale.downcase == params[:language].downcase} : nil

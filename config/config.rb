@@ -1,6 +1,8 @@
 REQUIRED_CONFIGS = [
   :author,
-  :category_publishable ]
+  :tag,
+  :category_publishable,
+  :related_story ]
 def config_loader
 
   required_configs = REQUIRED_CONFIGS.clone
@@ -15,11 +17,15 @@ def config_loader
     required_configs.delete(key)
 
     $_config[key] = { value: value, input_type: cnf[:input_type], possible_values: cnf[:possible_values] }
-    puts "--------------------------test"
     case key
       when :author
         $_flag[:is_author_simple] = value == 'simple'
         $_flag[:is_author_complex] = !$_flag[:is_author_simple]
+      when :tag
+        $_flag[:has_tag] = value == 'true'
+      when :related_story
+        $_flag[:has_related_story] = value != 'empty'
+        $_flag[:is_related_story_theme] = value == 'theme'
       when :category_publishable
       else
     end

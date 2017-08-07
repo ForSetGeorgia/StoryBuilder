@@ -43,7 +43,7 @@ class StoriesController < ApplicationController
     # @item.build_asset(:asset_type => Asset::TYPE[:story_thumbnail])
     logger.debug("------------------------------------------------#{@item.inspect}"  )
 #    @templates = Template.select_list
-#    @story_tags = []
+    @story_tags = []
     @themes = Theme.sorted
     @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
     @new = true
@@ -59,10 +59,12 @@ class StoriesController < ApplicationController
     # if !@item.asset_exists?
     #   @item.build_asset(:asset_type => Asset::TYPE[:story_thumbnail])
     # end
-#    @templates = Template.select_list(@item.template_id)
-#    @story_tags = @item.tags.token_input_tags
+    # @templates = Template.select_list(@item.template_id)
+     Rails.logger.debug("--------------------------------------------#{@story_tags}")
+    @story_tags = @item.tags.token_input_tags
     @themes = Theme.sorted
     @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
+
   end
 
   # POST /stories
@@ -84,7 +86,7 @@ class StoriesController < ApplicationController
         #   @item.build_asset(:asset_type => Asset::TYPE[:story_thumbnail])
         # end
         #@templates = Template.select_list(@item.template_id)
-#        @story_tags = @item.tags.token_input_tags
+        @story_tags = @item.tags.token_input_tags
         @item.current_locale = @item.story_locale
         @themes = Theme.sorted
         @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
@@ -127,7 +129,7 @@ class StoriesController < ApplicationController
           #   @item.build_asset(:asset_type => Asset::TYPE[:story_thumbnail])
           # end
           #@templates = Template.select_list(@item.template_id)
-#          @story_tags = @item.tags.token_input_tags
+          @story_tags = @item.tags.token_input_tags
           @item.current_locale = @item.story_locale
           @themes = Theme.sorted
           @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
@@ -240,6 +242,7 @@ class StoriesController < ApplicationController
       end
       @themes = Theme.sorted
       @authors = Author.sorted if $_flag[:is_author_complex] # configurable section [author][complex]
+      @story_tags = @item.tags.token_input_tags
       type = 'form'
     elsif type == 'section'
       if method=='select'

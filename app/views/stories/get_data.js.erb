@@ -26,6 +26,23 @@
          // was_permalink_box_length = $('input#storyPermalinkStaging').val().length;;
          show_story_permalink({'is_duplicate': false, 'permalink':$('input#storyPermalink').val()});
       }
+      if ($('#storyTagList').length > 0){
+        $('#storyTagList').tokenInput(
+          gon.tag_search,
+          {
+            method: 'POST',
+            minChars: 2,
+            theme: 'facebook',
+            allowCustomEntry: true,
+            preventDuplicates: true,
+            prePopulate: $('#storyTagList').data('load'),
+            hintText: gon.tokeninput_tag_hintText,
+            noResultsText: gon.tokeninput_tag_noResultsText,
+            searchingText: gon.tokeninput_searchingText
+          }
+        );
+      }
+
     <% end %>
 
 

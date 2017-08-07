@@ -171,6 +171,7 @@ class ApplicationController < ActionController::Base
   def process_filter_querystring(story_objects)
     gon.page_filtered = params[:sort].present? ||
                         params[:theme].present? ||
+                        params[:tag].present? ||
                         params[:language].present? ||
                         params[:q].present? ||
                         params[:following].present?
@@ -274,12 +275,12 @@ class ApplicationController < ActionController::Base
     # end
 
     #tags
-    #if params[:tag].present?
-    #  story_objects = story_objects.tagged_with(params[:tag])
-  	#	@story_filter_tag = params[:tag].titlecase
-    #else
-  	#	@story_filter_tag = I18n.t("filters.all")
-    #end
+    if params[:tag].present?
+     story_objects = story_objects.tagged_with(params[:tag])
+  		@story_filter_tag = params[:tag].titlecase
+    else
+  		@story_filter_tag = I18n.t("filters.all")
+    end
 
     # language
     #@story_filter_language_permalink =  ""

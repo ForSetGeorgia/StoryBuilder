@@ -11,16 +11,30 @@
       <%= link_to( t('app.common.home'), root_path(:locale => I18n.locale), title: t('app.common.app_name'), :class=>"link") %>
       </li>
       <div class="separator-hor"></div>
-      <li class="dropdown dropdown-hover">
-          <a href="#" class="dropdown-toggle link" data-toggle="dropdown"><%= t('helpers.links.themes') %><i class="caret"></i></a>
-          <ul class="dropdown-menu">
-            <% @themes_published.each do |theme| %>
-              <li class="story-type">
-                <%= link_to theme.formatted_name, theme_path(theme.permalink) %>
-              </li>
-            <% end %>
-          </ul>
-      </li>
+      <% if $_flag[:is_categorization_type_theme] && $_flag[:has_categorization_placement_nav] %>
+        <li class="dropdown dropdown-hover">
+            <a href="#" class="dropdown-toggle link" data-toggle="dropdown"><%= t('helpers.links.themes') %><i class="caret"></i></a>
+            <ul class="dropdown-menu">
+              <% @themes_published.each do |theme| %>
+                <li class="story-type">
+                  <%= link_to theme.formatted_name, theme_path(theme.permalink) %>
+                </li>
+              <% end %>
+            </ul>
+        </li>
+      <% end %>
+      <% if $_flag[:is_categorization_type_category] && $_flag[:has_categorization_placement_nav] %>
+        <li class="dropdown dropdown-hover">
+            <a href="#" class="dropdown-toggle link" data-toggle="dropdown"><%= t('helpers.links.categories') %><i class="caret"></i></a>
+            <ul class="dropdown-menu">
+              <% @categories_published.each do |category| %>
+                <li class="story-type">
+                  <%= link_to category.name, root_path(category: category.permalink) %>
+                </li>
+              <% end %>
+            </ul>
+        </li>
+      <% end %>
       <div class="separator-hor"></div>
       <li class="dropdown dropdown-hover">
           <a href="#" class="dropdown-toggle link" data-toggle="dropdown"><%= t("app.language.#{locale}") %><i class="caret"></i></a>
@@ -60,7 +74,7 @@
           <% end %>
 
           <ul class="dropdown-menu">
-            <% if current_user.role? User::ROLES[:coordinator] %>
+            <% if $_flag[:is_story_creation_permission_all] || ($_flag[:is_story_creation_permission_coordinator] && current_user.role? User::ROLES[:coordinator]) %>
               <li>
                 <%= link_to stories_path do %>
                   <i class="s i-mystories"></i>

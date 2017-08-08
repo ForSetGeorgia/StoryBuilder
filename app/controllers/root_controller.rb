@@ -156,18 +156,27 @@ class RootController < ApplicationController
   end
 
   def feed
-    index = params[:category].present? ? @categories_published.index{|x| x.permalink.downcase == params[:category].downcase} : nil
-    @items = Story.with_translations(I18n.locale).is_not_deleted.is_published.in_published_theme.recent
-    @filtered_by_category = ""
-    if index.present?
-      @filtered_by_category = @categories_published[index].permalink
-      @items = @items.by_category(@categories_published[index].id)
+    @items = Story.with_translations(I18n.locale).is_not_deleted.is_published
+    if $_flag[:is_categorization_type_theme]
+      @items = @items.in_published_theme
     end
+    @items = @items.recent
+
+    if $_flag[:is_categorization_type_category]
+      index = params[:category].present? ? @categories_published.index{|x| x.permalink.downcase == params[:category].downcase} : nil
+      @filtered_by_category = ""
+      if index.present?
+        @filtered_by_category = @categories_published[index].permalink
+        @items = @items.by_category(@categories_published[index].id)
+      end
+    end
+
    @filtered_by_tag = ""
    if params[:tag].present?
       @filtered_by_tag = params[:tag]
       @items =  @items.tagged_with(params[:tag])
     end
+
     @filter_by = ""
     @filter_by = ("category = " + @filtered_by_category + (@filtered_by_tag.present? ? ", " : "")) if @filtered_by_category.present?
     @filter_by += "tag = " + @filtered_by_tag  if @filtered_by_tag.present?

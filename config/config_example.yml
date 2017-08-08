@@ -1,37 +1,40 @@
 ---
 - :key: author
   :value: complex
-  :description: Author for story can be simple text field or complex model with additional
-    data, and authors page etc.
   :input_type: radio
   :possible_values: '["simple","complex"]'
+  :description: 'Author for story can be simple text field or complex model with additional data, and authors page etc.'
+
 - :key: tag
   :value: 'true'
-  :description: Story tags can be switched on/off
   :input_type: boolean
   :possible_values: '["true","false"]'
+  :description: 'Story tags can be switched on/off'
+
 - :key: related_story
   :value: theme
-  :description: If none do not show related stories, else logic on how this related
-    stories should be selected
   :input_type: select
   :possible_values: '["none","theme", "category", "tag"]'
+  :description: 'If none do not show related stories, else logic on how this related stories should be selected'
+
 - :key: categorization_type
   :value: theme
-  :description: For story categorization use simple category or extended theme
   :input_type: select
   :possible_values: '["category","theme"]'
+  :description: 'For story categorization use simple category or extended theme'
+
 - :key: categorization_placement
-  :value: none
-  :description: Where to show categorization menu in nav, filter, both places or do
-    not show at all
+  :value: both
   :input_type: select
   :possible_values: '["none","both","nav","filter"]'
+  :description: 'Where to show categorization menu in nav, filter, both places or do not show at all'
+
 - :key: story_creation_permission
   :value: 'coordinator'
   :description: 'Create story - anyone can create story or only those give role can create story'
   :input_type: select
   :possible_values: '["all","coordinator"]'
+
 - :key: disclaimer
   :value: 'true'
   :description: 'Switch on/off ability to show story disclaimer'

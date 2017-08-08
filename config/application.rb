@@ -101,8 +101,9 @@ module BootstrapStarter
     config.after_initialize do
       if ActiveRecord::Base.connection.table_exists? 'configs'
         Config.destroy_all
+        Config.connection.execute('ALTER TABLE configs AUTO_INCREMENT = 1')
         $_config.each{|k,v|
-          Config.create({ key: k, value: v[:value], input_type: v[:input_type], possible_values: v[:possible_values] })
+          Config.create({ key: k, value: v[:value], description: v[:description], input_type: v[:input_type], possible_values: v[:possible_values] })
         }
       end
     end

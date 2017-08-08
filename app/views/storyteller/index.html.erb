@@ -48,7 +48,7 @@
                <div class="addthis_native_toolbox"></div>
                 <%= link_to '#',   :'data-modalos-id' => "modalos-embed", :title => t('app.common.embed', locale: @story.current_locale), :class => "embed modalEmbed" do %>
                 <% end %>
-                <% if @story.has_disclaimer %>
+                <% if $_flag[:has_disclaimer] && @story.has_disclaimer %>
                 <div class="disclaimer" data-tip="<%= t('storyteller.disclaimer_text') %>"><%= t('storyteller.disclaimer') %></div>
                 <% end %>
               </div>

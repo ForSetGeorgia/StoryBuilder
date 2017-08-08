@@ -101,12 +101,17 @@ class ApplicationController < ActionController::Base
   end
 
 	def preload_global_variables
+
     @story_types = StoryType.sorted
-    @themes_published = Theme.published.with_stories.sorted
+    if $_flag[:is_categorization_type_category]
+		  @categories = Category.sorted
+      @categories_published = @categories.select{|x| x.has_published_stories == true}
+    elsif $_flag[:is_categorization_type_theme]
+      @themes_published = Theme.published.with_stories.sorted
+    end
+
     @languages = Language.app_locale_sorted #LANGUAGES # its an array that is initialized at rails app start Language.app_locale_sorted
     @languages_published = @languages.select{|x| x.has_published_stories == true}
-		# @categories = Category.sorted
-  #   @categories_published = @categories.select{|x| x.has_published_stories == true}
     @face_id = Rails.env.production? ? ENV['FACEBOOK_APP_ID'] : ENV['FACEBOOK_APP_ID_DEV']
     # for loading extra css/js files
 		@css = []
@@ -171,6 +176,7 @@ class ApplicationController < ActionController::Base
   def process_filter_querystring(story_objects)
     gon.page_filtered = params[:sort].present? ||
                         params[:theme].present? ||
+                        params[:category].present? ||
                         params[:tag].present? ||
                         params[:language].present? ||
                         params[:q].present? ||
@@ -261,18 +267,20 @@ class ApplicationController < ActionController::Base
     #end
     #story_objects = story_objects.is_staff_pick if @story_filter_staff_pick
 
-    # category
-    # @story_filter_category_all = true
-    # @story_filter_category_permalink =  ""
-    # index = params[:category].present? ? @categories_published.index{|x| x.permalink.downcase == params[:category].downcase} : nil
-    # if index.present?
-    #   story_objects = story_objects.by_category(@categories_published[index].id)
-  		# @story_filter_category = @categories_published[index].name
-    #   @story_filter_category_permalink =  @categories_published[index].permalink
-    #   @story_filter_category_all = false
-    # else
-  		# @story_filter_category = I18n.t("filters.all")
-    # end
+    if $_flag[:is_categorization_type_category]
+      # category
+      @story_filter_category_all = true
+      @story_filter_category_permalink =  ""
+      index = params[:category].present? ? @categories_published.index{|x| x.permalink.downcase == params[:category].downcase} : nil
+      if index.present?
+        story_objects = story_objects.by_category(@categories_published[index].id)
+    		@story_filter_category = @categories_published[index].name
+        @story_filter_category_permalink =  @categories_published[index].permalink
+        @story_filter_category_all = false
+      else
+    		@story_filter_category = I18n.t("filters.all")
+      end
+    end
 
     #tags
     if $_flag[:has_tag]

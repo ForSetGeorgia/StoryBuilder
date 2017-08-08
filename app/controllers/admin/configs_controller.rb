@@ -31,7 +31,7 @@ class Admin::ConfigsController < ApplicationController
     respond_to do |format|
       if @item.update_attributes(params[:config])
         require 'yaml' # Built in, no gem required
-        File.write("#{Rails.root}/config/config.yml", Config.all.map {|m| { key: m.key, value: m.value, input_type: m.input_type, possible_values: m.possible_values }}.to_yaml)
+        File.write("#{Rails.root}/config/config.yml", Config.all.map {|m| { key: m.key, value: m.value, description: m.description, input_type: m.input_type, possible_values: m.possible_values }}.to_yaml)
         config_loader
         format.html { redirect_to admin_configs_path, flash: {success:  t('app.msgs.success_updated', :obj => t('activerecord.models.config'))} }
       else

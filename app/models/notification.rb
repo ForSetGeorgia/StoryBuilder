@@ -10,7 +10,7 @@ class Notification < ActiveRecord::Base
   #          :published_news => 4, :staff_pick_selection => 5, :new_user => 6, :story_collaboration => 7, :processed_videos => 8}
 
   TYPES = {:published_theme => 1, :published_story_by_author => 2, :story_comment => 3,
-           :new_user => 6, :story_collaboration => 7, :processed_videos => 8}
+           :new_user => 6, :story_collaboration => 7, :processed_videos => 8, :published_story => 9}
 
 
   # see if user already following another user
@@ -59,7 +59,7 @@ protected
       emails = []
       if ids && locale
          x = User.select("distinct email")
-         .where(:wants_notifications => true, :notification_language => locale, :id => ids)         
+         .where(:wants_notifications => true, :notification_language => locale, :id => ids)
       end
 
       if x.present?
@@ -67,7 +67,7 @@ protected
       end
       return emails
     end
-   
+
     # get the email address of admins
     def self.get_video_prossing_errors_emails(locale)
       emails = []
@@ -81,7 +81,7 @@ protected
       end
       return emails
     end
-   
+
    # get notifications for users that want notifications of new stories:
    # - any new story
    # - story in type
@@ -98,10 +98,32 @@ protected
         sql << " or (notification_type = :follow_type and identifier in (:author_ids))"
       end
       sql << ")"
-      
+
       notifications = includes(:user)
-                       .where(sql, 
+                       .where(sql,
                           locale: locale, theme_type: TYPES[:published_theme], type_ids: type_ids,
+                          follow_type: TYPES[:published_story_by_author], author_ids: author_ids)
+    end
+
+    return notifications
+  end
+
+  def self.get_published_story_notifications(locale, author_ids, category_ids)
+    notifications = []
+    if locale
+      sql = "users.wants_notifications = 1 and users.notification_language = :locale and ((notification_type = :story_type and (identifier is null "
+      if category_ids.present?
+        sql << "or identifier in (:category_ids) "
+      end
+      sql << ")) "
+      if author_ids.present?
+        sql << " or (notification_type = :follow_type and identifier in (:author_ids))"
+      end
+      sql << ")"
+
+      notifications = includes(:user)
+                       .where(sql,
+                          locale: locale, story_type: TYPES[:published_story], category_ids: category_ids,
                           follow_type: TYPES[:published_story_by_author], author_ids: author_ids)
     end
 

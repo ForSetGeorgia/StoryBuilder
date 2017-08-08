@@ -11,6 +11,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:key) %></th>
       <th><%= model_class.human_attribute_name(:value) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:input_type) %></th>
       <th><%= model_class.human_attribute_name(:possible_values) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -21,6 +22,7 @@
       <tr>
         <td><%= item.key %></td>
         <td><%= item.value %></td>
+        <td><%= item.description %></td>
         <td><%= item.input_type %></td>
         <td><%= item.possible_values %></td>
         <td>

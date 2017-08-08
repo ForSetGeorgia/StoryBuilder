@@ -159,10 +159,12 @@
 
 
       <% end %>
-      <% if !@trans %>
-        <div class='one-line'>
-          <%= f.input :has_disclaimer, :as => :boolean, :hint => t('.hint.has_disclaimer'), :input_html => { id: "sectionHasDisclaimer"} %>
-        </div>
+      <% if $_flag[:has_disclaimer] %>
+        <% if !@trans %>
+          <div class='one-line'>
+            <%= f.input :has_disclaimer, :as => :boolean, :hint => t('.hint.has_disclaimer'), :input_html => { id: "sectionHasDisclaimer"} %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
     <% if !isTO %>

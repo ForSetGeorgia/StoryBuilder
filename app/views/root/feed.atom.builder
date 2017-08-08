@@ -7,9 +7,11 @@ atom_feed do |feed|
     feed.entry item, :published => item.published_at, :url => storyteller_show_path(item.permalink,:only_path => false)    do |entry|
       entry.title item.title
       entry.content(item.about, :type => 'html')
-      item.categories.map {|t|
-        entry.category term: t.permalink.downcase, label: t.name, scheme: feed_path(:category => t.permalink.downcase )
-      }
+      if $_flag[:is_categorization_type_category] # configurable section [author][simple]
+        item.categories.map {|t|
+          entry.category term: t.permalink.downcase, label: t.name, scheme: feed_path(:category => t.permalink.downcase )
+        }
+      end
        if $_flag[:is_author_simple] # configurable section [author][simple]
         entry.author do |author|
           author.name item.author

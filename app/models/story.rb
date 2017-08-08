@@ -343,8 +343,15 @@ class Story < ActiveRecord::Base
   #  if there is no next story get from beginning of the list
   def next_stories(n=4)
     next_ordered = nil
-    themes_ids = self.themes.published.pluck(:id) # get current story themes ids
-    story_ids = StoryTheme.where(:theme_id => themes_ids).pluck(:story_id).uniq # get all stories for themes only uniq
+    if $_flag[:is_related_story_theme]
+      themes_ids = self.themes.published.pluck(:id) # get current story themes ids
+      story_ids = StoryTheme.where(:theme_id => themes_ids).pluck(:story_id).uniq # get all stories for themes only uniq
+    elsif $_flag[:is_related_story_category]
+      category_ids = self.categories.pluck(:id) # get current story themes ids
+      story_ids = StoryCategory.where(:category_id => category_ids).pluck(:story_id).uniq # get all stories for themes only uniq
+    elsif $_flag[:is_related_story_tag]
+      story_ids = Story.tagged_with(self.tag_list, :any => true).pluck(:id) # get story ids with matched tags
+    end
     if story_ids
       story_ids = StoryTranslation
                               .where(locale: self.current_locale, published: true, story_id: story_ids)
@@ -689,6 +696,10 @@ class Story < ActiveRecord::Base
     StoryTranslation.where(:story_id => self.id, :published => true).pluck(:locale).uniq
   end
 
+  # get all of the unique story locales for published stories
+  def self.published_categories
+    select('story_categories.category_id').is_published_home_page.joins(:story_categories).map{|x| x['category_id']}.uniq.sort
+  end
 
   # get nicely formatted list of author names
   def story_author_names

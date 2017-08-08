@@ -1,8 +1,9 @@
 REQUIRED_CONFIGS = [
   :author,
   :tag,
-  :category_publishable,
-  :related_story ]
+  :related_story,
+  :categorization_type,
+  :categorization_placement ]
 def config_loader
 
   required_configs = REQUIRED_CONFIGS.clone
@@ -16,17 +17,31 @@ def config_loader
 
     required_configs.delete(key)
 
-    $_config[key] = { value: value, input_type: cnf[:input_type], possible_values: cnf[:possible_values] }
+    $_config[key] = { value: value, description: cnf[:description], input_type: cnf[:input_type], possible_values: cnf[:possible_values] }
     case key
       when :author
         $_flag[:is_author_simple] = value == 'simple'
-        $_flag[:is_author_complex] = !$_flag[:is_author_simple]
+        $_flag[:is_author_complex] = value == 'complex'
       when :tag
         $_flag[:has_tag] = value == 'true'
       when :related_story
-        $_flag[:has_related_story] = value != 'empty'
+        $_flag[:has_related_story] = value != 'none'
         $_flag[:is_related_story_theme] = value == 'theme'
-      when :category_publishable
+        $_flag[:is_related_story_category] = value == 'category'
+        $_flag[:is_related_story_language] = value == 'language'
+        $_flag[:is_related_story_tag] = value == 'tag'
+      when :categorization_type
+        $_flag[:is_categorization_type_category] = value == 'category'
+        $_flag[:is_categorization_type_theme] = value == 'theme'
+      when :categorization_placement
+        $_flag[:has_categorization_placement] = value != 'none'
+        $_flag[:has_categorization_placement_nav] = value == 'nav' || value == 'both'
+        $_flag[:has_categorization_placement_filter] = value == 'filter' || value == 'both'
+      when :story_creation_permission
+        $_flag[:is_story_creation_permission_all] = value == 'all'
+        $_flag[:is_story_creation_permission_coordinator] = value == 'coordinator'
+      when :disclaimer
+        $_flag[:has_disclaimer] = value == 'true'
       else
     end
   }

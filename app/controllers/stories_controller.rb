@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
   before_filter :authenticate_user!, :except => [:review]
   before_filter do |controller_instance|
-    controller_instance.send(:valid_role?, User::ROLES[:coordinator])
+    $_flag[:is_story_creation_permission_all] || ($_flag[:is_story_creation_permission_coordinator] && controller_instance.send(:valid_role?, User::ROLES[:coordinator]))
   end
   before_filter(:except => [:index,:new, :create, :check_permalink, :tag_search, :collaborator_search, :review]) do |controller_instance|
     controller_instance.send(:can_edit_story?, params[:id])

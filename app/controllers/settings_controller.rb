@@ -197,11 +197,29 @@ logger.debug "************** nickname after generate: #{u.nickname}"
   					end
   					msg << I18n.t('app.msgs.notification.new_story_by_type_success',
   						:types => @story_types.select{|x| params[:themes_types].index(x.id.to_s)}.map{|x| x.name}.join(", "))
+          elsif params[:stories_categories].present?
+            # by category
+            # delete anything on file first
+            Notification.where(:notification_type => Notification::TYPES[:published_story],
+                                            :user_id => current_user.id).delete_all
+            # add each category
+            params[:stories_categories].each do |cat_id|
+              Notification.create(:notification_type => Notification::TYPES[:published_story],
+                                              :user_id => current_user.id,
+                                              :identifier => cat_id)
+            end
+            msg << I18n.t('app.msgs.notification.new_story_by_category_success',
+              :categories => @categories.select{|x| params[:stories_categories].index(x.id.to_s)}.map{|x| x.name}.join(", "))
   				else
   					# delete all notifications
   					Notification.where(:notification_type => Notification::TYPES[:published_theme],
   																					:user_id => current_user.id).delete_all
   					msg << I18n.t('app.msgs.notification.new_theme_none_success')
+
+            # delete all notifications
+            Notification.where(:notification_type => Notification::TYPES[:published_story],
+                                            :user_id => current_user.id).delete_all
+            msg << I18n.t('app.msgs.notification.new_story_none_success')
           end
 
   				# process following notifications
@@ -232,7 +250,9 @@ logger.debug "************** nickname after generate: #{u.nickname}"
   				# delete any on record
   				Notification.where(:notification_type => Notification::TYPES[:published_theme],
   																				:user_id => current_user.id).delete_all
-
+          # delete any on record
+          Notification.where(:notification_type => Notification::TYPES[:published_story],
+                                          :user_id => current_user.id).delete_all
   				msg << I18n.t('app.msgs.notification.no')
   			end
   		end

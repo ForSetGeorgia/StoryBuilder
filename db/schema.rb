@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170807122925) do
+ActiveRecord::Schema.define(:version => 20170808094634) do
 
   create_table "assets", :force => true do |t|
     t.integer  "item_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20170807122925) do
     t.string   "possible_values"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "description"
   end
 
   create_table "content_translations", :force => true do |t|

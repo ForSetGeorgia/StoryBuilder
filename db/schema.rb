@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170208063044) do
+ActiveRecord::Schema.define(:version => 20180110134610) do
 
   create_table "assets", :force => true do |t|
     t.integer  "item_id"
@@ -101,6 +101,28 @@ ActiveRecord::Schema.define(:version => 20170208063044) do
   end
 
   add_index "contents", ["section_id"], :name => "index_contents_on_section_id"
+
+  create_table "countries", :force => true do |t|
+    t.boolean  "has_published_stories", :default => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "countries", ["has_published_stories"], :name => "index_countries_on_has_published_stories"
+
+  create_table "country_translations", :force => true do |t|
+    t.integer  "country_id"
+    t.string   "locale",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "permalink"
+  end
+
+  add_index "country_translations", ["country_id"], :name => "index_country_translations_on_country_id"
+  add_index "country_translations", ["locale"], :name => "index_country_translations_on_locale"
+  add_index "country_translations", ["name"], :name => "index_country_translations_on_name"
+  add_index "country_translations", ["permalink"], :name => "index_country_translations_on_permalink"
 
   create_table "embed_media", :force => true do |t|
     t.integer  "section_id"
@@ -429,6 +451,8 @@ ActiveRecord::Schema.define(:version => 20170208063044) do
     t.integer  "comments_count",        :default => 0
     t.integer  "story_type_id"
     t.boolean  "has_disclaimer",        :default => true
+    t.boolean  "deleted",               :default => false
+    t.datetime "deleted_at"
   end
 
   add_index "stories", ["cached_votes_down"], :name => "index_stories_on_cached_votes_down"
@@ -437,6 +461,7 @@ ActiveRecord::Schema.define(:version => 20170208063044) do
   add_index "stories", ["cached_votes_up"], :name => "index_stories_on_cached_votes_up"
   add_index "stories", ["cached_weighted_score"], :name => "index_stories_on_cached_weighted_score"
   add_index "stories", ["comments_count"], :name => "index_stories_on_comments_count"
+  add_index "stories", ["deleted"], :name => "index_stories_on_deleted"
   add_index "stories", ["publish_home_page", "staff_pick"], :name => "index_stories_on_publish_home_page_and_staff_pick"
   add_index "stories", ["reviewer_key"], :name => "index_stories_on_reviewer_key"
   add_index "stories", ["story_locale"], :name => "index_stories_on_story_locale"
@@ -463,6 +488,16 @@ ActiveRecord::Schema.define(:version => 20170208063044) do
 
   add_index "story_categories", ["category_id"], :name => "index_story_categories_on_category_id"
   add_index "story_categories", ["story_id"], :name => "index_story_categories_on_story_id"
+
+  create_table "story_countries", :force => true do |t|
+    t.integer  "story_id"
+    t.integer  "country_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "story_countries", ["country_id"], :name => "index_story_countries_on_country_id"
+  add_index "story_countries", ["story_id"], :name => "index_story_countries_on_story_id"
 
   create_table "story_themes", :force => true do |t|
     t.integer  "story_id"

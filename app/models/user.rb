@@ -37,6 +37,23 @@ class User < ActiveRecord::Base
 #  before_save :check_nickname_changed
 #	before_save :generate_avatar_file_name
   before_save :set_notification_language
+  after_save :assign_stories
+
+  # if a user's role changes and is at least a coordinator,
+  # make sure they have access to all stories by adding them to story user
+  # if the role is user, make sure they have no access to any stories in story user
+  def assign_stories
+    if self.role_changed?
+      if self.role == ROLES[:user]
+        # remove all records
+        StoryUser.where(user_id: self.id).delete_all
+      elsif role?(ROLES[:coordinator])
+        # add all story records
+        # it is possible that they already had some stories, so only add stories that they did not have
+        self.stories << Story.select(:id).where('id not in (select story_id from story_users where user_id = ?)', self.id)
+      end
+    end
+  end
 
   # email_no_domain is used in the search for collaborators
   # so people cannot search using domain name to guess their email addresses

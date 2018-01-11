@@ -155,28 +155,6 @@ a:link, a:hover, a:visited, a:active
 }
 /* Navbar End */
 
-.powered-by
-{
-  font-family:opensans-l,verdana;
-  font-size:14px;
-  text-align: right;
-  margin-right: 27px;
-  height:16px;
-  margin-bottom:15px;
-  color:#333;
-  background-color:transparent;
-  float:right;
-}
-.powered-by a
-{
-  color:#333;
-}
-.powered-by a:hover,.powered-by a:focus
-{
-  text-decoration:underline;
-  color:#000;
-}
-
 
 /* storybuilder image */
 i.s

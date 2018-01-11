@@ -1,4 +1,4 @@
-# JumpStart Georgia's StoryBuilder used for [Chai Khana's site](http://chai-khana.org).
+# ForSet's StoryBuilder used for [Chai Khana's site](http://chai-khana.org).
 
 ## Summary
 StoryBuilder is a web application that allows users to build mixed-media stories that can then be shared with the world. You can try StoryBuilder out for yourself [here](http://storybuilder.jumpstart.ge/en).
@@ -9,7 +9,7 @@ The idea for this application came after viewing mixed-media stories like this [
 ## How It Works
 StoryBuilder is similar to a blog editor like wordpress or tumblr, but at this point is still a little rustic.  In essence, StoryBuilder allows you to add content, images, and/or videos into sections in a story that can be ordered however you want.
 
-Right now there are four types of sections that can be created: 
+Right now there are four types of sections that can be created:
 * Text: Simple text with a rich-text editor like Word or Google Docs.
 * Embed Online Media: Add online video and audio from sites like youtube, vimeo and soundcloud.
 * Full-Screen Media: This can be a combination of images and/or videos that will appear on the screen in a vertical slider format, one after the other.  The media is stretched to fill the users entire window and a small caption text can appear ontop of the media.

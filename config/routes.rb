@@ -103,14 +103,14 @@ BootstrapStarter::Application.routes.draw do
 
     # user settings section
 		match "settings" => "settings#index", as: 'settings'
-		match "settings/notifications" => "settings#notifications", as: 'settings_notifications'
+		# match "settings/notifications" => "settings#notifications", as: 'settings_notifications'
 		match "settings/remove_avatar" => "settings#remove_avatar", as: 'settings_remove_avatar'
 		match "settings/check_nickname" => "settings#check_nickname", as: 'settings_check_nickname', :via => :post, :defaults => { :format => 'json' }
 		match "settings/invitations" => "settings#invitations", as: 'settings_invitations', :via => :get
 		match "settings/invitations/accept/:key" => "settings#accept_invitation", as: 'settings_accept_invitation', :via => :get
 		match "settings/invitations/decline/:key" => "settings#decline_invitation", as: 'settings_decline_invitation', :via => :get
-		match "settings/follow_user" => "settings#follow_user", as: 'settings_follow_user', :via => :post, :defaults => { :format => 'json' }
-		match "settings/unfollow_user" => "settings#unfollow_user", as: 'settings_unfollow_user', :via => :post, :defaults => { :format => 'json' }
+		# match "settings/follow_user" => "settings#follow_user", as: 'settings_follow_user', :via => :post, :defaults => { :format => 'json' }
+		# match "settings/unfollow_user" => "settings#unfollow_user", as: 'settings_unfollow_user', :via => :post, :defaults => { :format => 'json' }
 
     # root pages
 		match "about" => "root#about", as: 'about'

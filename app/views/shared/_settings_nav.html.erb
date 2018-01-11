@@ -8,15 +8,6 @@
       </span>
     <% end %>
   </li>
-  <% cls = current_page?(settings_notifications_path) ? 'class=active' : '' %>
-  <li <%=cls %>>
-    <%= link_to settings_notifications_path, :title => t('settings.notifications.title') do %>
-      <span class="glyphicon glyphicon-envelope"></span>
-      <span class="nav-text">
-        <%= t('settings.notifications.title') %>
-      </span>
-    <% end %>
-  </li>
   <% if current_user.role? User::ROLES[:coordinator] %>
     <% cls = current_page?(settings_invitations_path) ? 'class=active' : '' %>
     <li <%=cls %>>

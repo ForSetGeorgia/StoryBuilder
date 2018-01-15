@@ -46,3 +46,8 @@ You will need the following [Environment Variables](https://help.ubuntu.com/comm
 * STORY_BUILDER_YOUTUBE_API_KEY - YouTube API key ([get from here](https://console.developers.google.com/project)) is used to verify that the YouTube urls exist.
 * DETECT_LANGUAGE_API_KEY - [Language Detection API](http://detectlanguage.com/) key for determining the language a story is written in
 
+## Omniauth (facebook) Login
+Omniauth login allows users to login in with 3rd party systems like facebook or twitter. This application has facebook login built in by default, but is turned off by default. If you want to use facebook for logging in, do the following:
+* Go to [app/controllers/application_controller.rb](app/controllers/application_controller.rb) and set @enable_omniauth = true
+* Register an app on [facebook](https://developers.facebook.com/apps/)
+* Create the appropriate facebook environment variables mentioned in the last section using the app id and app secret facebook gives you

@@ -90,6 +90,9 @@ class ApplicationController < ActionController::Base
 
     # reset globalize story_locale
     Globalize.story_locale = Globalize.locale
+
+    # indicate that whether login should allow local and omniauth or just locale
+    @enable_omniauth = false
 	end
 
 

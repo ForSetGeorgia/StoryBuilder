@@ -43,7 +43,7 @@ class StorytellerController < ApplicationController
         @no_nav = true if params[:n] == 'n'
 
         @css.push("navbar.css", "navbar2.css", "storyteller.css", "modalos.css", "grid2.css")
-        @js.push("storyteller.js","modalos.js","follow.js")
+        @js.push("storyteller.js","modalos.js")
 
         respond_to do |format|
           format.html

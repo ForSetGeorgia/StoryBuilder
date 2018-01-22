@@ -21,7 +21,7 @@ class RootController < ApplicationController
     @author = Author.find_by_permalink(params[:user_id])
 
     if @author.present?
-      @js.push("filter.js","stories.js","follow.js")
+      @js.push("filter.js","stories.js")
       @css.push("navbar.css", "filter.css", "grid.css", "stories.css", "author.css")
       @stories = process_filter_querystring(Story.by_authors(@author.id).in_published_theme).with_translations(I18n.locale).paginate(:page => params[:page], :per_page => per_page)
       @editable = (user_signed_in? && current_user.id == @author.id)
@@ -57,7 +57,7 @@ class RootController < ApplicationController
             @is_embed = true
             @no_nav = true
             @css.push("navbar.css", "navbar2.css", "storyteller.css", "modalos.css")
-            @js.push("storyteller.js","modalos.js", "follow.js")
+            @js.push("storyteller.js","modalos.js")
 
             impressionist(@story, :unique => [:session_hash]) # record the view count
             @story.reload

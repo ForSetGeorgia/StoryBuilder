@@ -206,8 +206,7 @@
 
 
     <% if !@export %>
-      <%= javascript_include_tag  *(@js.present? ? ["application", @js, extra_js].flatten : ["application", extra_js].flatten), :media => "all" %>
-      <%# javascript_include_tag  *(@js.present? ? ["application", "story", @js, extra_js].flatten : ["application", "story", extra_js].flatten), :media => "all" %>
+      <%= javascript_include_tag  *(@js.present? ? ["application", (extra_js.present? ? extra_js : "story"), @js].flatten : ["application", (extra_js.present? ? extra_js : "story")].flatten), :media => "all" %>
     <% else %>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>

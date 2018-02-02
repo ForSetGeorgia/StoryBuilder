@@ -33,6 +33,6 @@
     <link href="css/modalos.css" media="all" rel="stylesheet" type="text/css">
     <link href="css/story.css" media="all" rel="stylesheet" type="text/css">
 <% else %>
-    <%= stylesheet_link_tag  *(@css.present? ? ["application", (extra_css.present? ? extra_css : "story"), @css].flatten : ["application", "story", extra_js].flatten), :media => "all" %>
+    <%= stylesheet_link_tag  *(@css.present? ? ["application", (extra_css.present? ? extra_css : "story"), @css].flatten : ["application", (extra_css.present? ? extra_css : "story")].flatten), :media => "all" %>
     <%= favicon_link_tag '/favicon.ico', :rel => 'shortcut icon' %>
 <% end %>

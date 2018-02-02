@@ -1,5 +1,6 @@
 /* global $ */
 /*eslint no-console: 0 */
+var navStealthOn = false
 $(document).ready(function (){
   var sbn_elem = $(".navbar-storybuilder");
   if(sbn_elem.length != 0)
@@ -8,7 +9,7 @@ $(document).ready(function (){
     $(window).on("scroll", function () {
       var st = $(this).scrollTop();
       if(st >= 0) {
-        sbn_elem.toggleClass("stealth", st > lastScrollTop ? true : false );
+        sbn_elem.toggleClass("stealth", navStealthOn || st > lastScrollTop ? true : false );
         lastScrollTop = st;
       }
     });

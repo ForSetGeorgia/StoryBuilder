@@ -101,6 +101,9 @@ GEM
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
       warden (~> 1.1.1)
+    dotenv (2.0.1)
+    dotenv-rails (2.0.1)
+      dotenv (= 2.0.1)
     dynamic_form (1.1.4)
     erubis (2.7.0)
     exception_notification (2.5.2)
@@ -284,6 +287,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.2)
   detect_language (~> 1.0.7)
   devise (~> 2.0.4)
+  dotenv-rails (~> 2.0.0)
   dynamic_form (~> 1.1.4)
   exception_notification (~> 2.5.2)
   formtastic (~> 2.2.1)
@@ -330,4 +334,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.6
+   1.16.1

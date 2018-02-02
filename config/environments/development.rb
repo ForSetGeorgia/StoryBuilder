@@ -14,7 +14,7 @@ BootstrapStarter::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -28,7 +28,7 @@ BootstrapStarter::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  
+
 	# devise requires
 	config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
@@ -37,8 +37,17 @@ BootstrapStarter::Application.configure do
     :email_prefix => "[Story Builder Dev App Error (#{Rails.env})] ",
     :sender_address => ENV['STORY_BUILDER_FROM_EMAIL'],
     :exception_recipients => ENV['STORY_BUILDER_ERROR_TO_EMAIL']
-    
+
   Paperclip.options[:command_path] = "/usr/local/bin/"
+
+
+
+  # Prevents from writing logs on `log/development.log`
+  logger        = ::Logger.new(STDOUT)
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
+
+  # Replace `config.active_support.deprecation = :log` with:
+  config.active_support.deprecation = :stderr
 end
 
 

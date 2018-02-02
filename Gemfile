@@ -11,9 +11,9 @@ gem "remotipart", '~> 1.2' # ajax file upload
 gem 'omniauth' # to login via facebook
 gem 'omniauth-facebook' # to login via facebook
 gem 'acts_as_list', '~> 0.6.0' # for sorting ordering records
-gem 'tinymce-rails', "~> 3.5.8.3", :branch => "tinymce-3" #tinymce editor https://github.com/spohlenz/tinymce-rails/tree/tinymce-4
+gem 'tinymce-rails', "~> 3.5.8.3"#, :branch => "tinymce-3" #tinymce editor https://github.com/spohlenz/tinymce-rails/tree/tinymce-4
 #gem 'tinymce-rails-langs' #tinymce languages https://github.com/spohlenz/tinymce-rails-langs
-gem 'tinymce-rails-imageupload', '3.5.8.6', :branch => "tinymce3"   #tinymce imageupload https://github.com/PerfectlyNormal/tinymce-rails-imageupload/tree/master
+gem 'tinymce-rails-imageupload', '3.5.8.6'#, :branch => "tinymce3"   #tinymce imageupload https://github.com/PerfectlyNormal/tinymce-rails-imageupload/tree/master
 gem 'amoeba', '~> 2.1.0' # cloning objects with all children
 gem 'devise', '~> 2.0.4' # user authentication
 gem "cancan", "~> 1.6.8" # user authorization
@@ -49,6 +49,7 @@ gem 'rack-utf8_sanitizer', '~> 1.3.2' # prevent invalid encoding error
 gem 'json', '~> 2.0', '>= 2.0.2' # json parser faster than default
 gem 'nokogiri'
 gem 'test-unit', '~> 3.0' # required for running rails console
+gem 'dotenv-rails', '~> 2.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

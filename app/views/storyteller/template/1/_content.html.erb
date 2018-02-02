@@ -1,4 +1,5 @@
-    <% alignment = { "left" => -1, "center" => 0, "right" => 1 }%>
+  <% alignment = { "left" => -1, "center" => 0, "right" => 1 }%>
+  <div id='storyTeller' lang="<%= @story.current_locale %>">
     <div class="main">
       <div class="article">
         <% columnSectionCount = 0 %>
@@ -237,3 +238,5 @@
         <% end %>
       </div>
     </div>
+  </div>
+  <%= render partial: "storyteller/template/#{@template}/_content_infobottom.html.erb"%>

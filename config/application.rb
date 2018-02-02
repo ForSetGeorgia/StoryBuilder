@@ -65,6 +65,7 @@ module BootstrapStarter
 
     # tell the assest pipeline to add the public/javascripts dir as assets path
     config.assets.paths << "#{Rails.root}/public/javascripts/"
+    config.assets.paths << "#{Rails.root}/public/template/"
 
     # in app/assets folder
     config.assets.precompile += %w( collaborators.js filter.js logos.js modalos.js news.js nickname.js search.js settings.js story.js stories.js storyteller.js themes.js )
@@ -78,6 +79,7 @@ module BootstrapStarter
 
     config.assets.precompile += %w( jquery.ui.datepicker.js )
     config.assets.precompile += %w( jquery.ui.datepicker.css )
+    config.assets.precompile += %w( template/*.js template/*.css )
 
 
     # from: http://stackoverflow.com/a/24727310

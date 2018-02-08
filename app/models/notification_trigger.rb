@@ -2,12 +2,16 @@ class NotificationTrigger < ActiveRecord::Base
   attr_accessible :notification_type, :identifier, :processed
   scope :not_processed, where(:processed => false)
 
+  ##################
+  ## NOTE - THE CRON JOB THAT CALLS THIS IS TURNED OFF
+  ##        AS OF 2018 02 08
+  ##################
   def self.process_all_types
     puts "**************************"
     puts "--> Notification Triggers - process all types start at #{Time.now}"
     puts "**************************"
     process_new_user
-    # process_published_theme
+    process_published_theme
     process_story_collaboration
     process_story_comment
     puts "**************************"
@@ -18,6 +22,10 @@ class NotificationTrigger < ActiveRecord::Base
   #################
   ## new user
   #################
+  ##################
+  ## NOTE - THE OBSERVER ACTIONS THAT CALLS THIS IS TURNED OFF
+  ##        AS OF 2018 02 08
+  ##################
   def self.add_new_user(id)
     NotificationTrigger.create(:notification_type => Notification::TYPES[:new_user], :identifier => id)
   end
@@ -167,6 +175,10 @@ class NotificationTrigger < ActiveRecord::Base
   #################
   ## story comment
   #################
+  ##################
+  ## NOTE - THE OBSERVER ACTIONS THAT CALLS THIS IS TURNED OFF
+  ##        AS OF 2018 02 08
+  ##################
   def self.add_story_comment(id)
     NotificationTrigger.create(:notification_type => Notification::TYPES[:story_comment], :identifier => id)
   end

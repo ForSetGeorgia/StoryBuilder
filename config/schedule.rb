@@ -37,6 +37,6 @@ end
 
 # send notifications
 every 30.minutes do
-  runner "NotificationTrigger.process_all_types"
+  # runner "NotificationTrigger.process_all_types"
 end
 

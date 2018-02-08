@@ -2,7 +2,7 @@ class UserObserver < ActiveRecord::Observer
 
   # send notification if the agenda/law is now public
   def after_create(user)
-    user.send_notification = true    
+    # user.send_notification = true
     return true
   end
 
